@@ -4,5 +4,8 @@ from . import views
 
 app_name = 'core'
 urlpatterns = [
-    # We will add our URL patterns here in a later phase.
+    path('', views.HomeView.as_view(), name='home'),
+    # Paths to serve PWA files from the root
+    path('manifest.json', views.manifest_json, name='manifest'),
+    path('service-worker.js', views.service_worker, name='service-worker'),
 ]
