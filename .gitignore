@@ -31,6 +31,7 @@ __pycache__/
 # Ignore user-uploaded media files in a local development context if you
 # were to configure a local media root. Your production media is on GCS.
 /media/
+/pdfs/
 
 # --- IDE / Editor specific files ---
 # Ignore configuration files created by popular editors and IDEs.
