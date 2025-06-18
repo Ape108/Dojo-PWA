@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>{{ belt.name }} Belt</h2>
+    <div class="controls">
+        {% if belt.pdf_file %}
+            <a href="{% url 'belts:manual' belt.pk %}" class="action-button">Training Manual (PDF)</a>
+        {% endif %}
+        <a href="{% url 'belts:flashcard_sequential' belt.pk %}" class="action-button">Browse Techniques</a>
+        <a href="{% url 'belts:flashcard_random' belt.pk %}" class="action-button">Random Flashcard</a>
+    </div>
+
+    <div class="navigation">
+        <div>{% if prev_belt %}<a href="{% url 'belts:detail' prev_belt.pk %}">&laquo; {{ prev_belt.name }}</a>{% endif %}</div>
+        <div>{% if next_belt %}<a href="{% url 'belts:detail' next_belt.pk %}">{{ next_belt.name }} &raquo;</a>{% endif %}</div>
+    </div>
+{% endblock %}

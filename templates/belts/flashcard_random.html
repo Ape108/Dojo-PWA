@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>{{ belt.name }} - Random Flashcard</h2>
+    <div class="controls" style="flex-direction:row; justify-content:space-between;">
+        <a href="{% url 'belts:detail' belt.pk %}">Back to Belt</a>
+        <a href="{% url 'belts:flashcard_random' belt.pk %}">Next Card &raquo;</a>
+    </div>
+
+    {% if technique %}
+    <div class="flashcard" id="flashcard">
+        <h3>{{ technique.name }}</h3>
+        <p class="flip-instruction"><em>(Tap to reveal details)</em></p>
+        <div class="details">
+            <h4>Description</h4>
+            <p>{{ technique.description|linebreaks }}</p>
+            
+            {% if technique.get_video_url %}
+                <h4>Video</h4>
+                <video controls preload="metadata">
+                    <source src="{{ technique.get_video_url }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            {% else %}
+                <p><strong>Video coming soon!</strong></p>
+            {% endif %}
+        </div>
+    </div>
+    <script>
+        // Simple JS to toggle a class on the flashcard container, triggering CSS changes.
+        document.getElementById('flashcard').addEventListener('click', function() {
+            this.classList.toggle('is-flipped');
+        });
+    </script>
+    {% else %}
+        <p>This belt has no techniques yet.</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Select a Belt</h2>
+    <div class="belt-grid">
+        {% for belt in belts %}
+            <a href="{% url 'belts:detail' belt.pk %}" class="belt-button">{{ belt.name }}</a>
+        {% empty %}
+            <p>No belts have been configured by an administrator yet.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

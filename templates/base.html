@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dojo Training Manual</title>
+    <!-- PWA Manifest Link -->
+    <link rel="manifest" href="{% url 'core:manifest' %}">
+    <meta name="theme-color" content="#333333">
+    <style>
+        /* Basic mobile-first styling */
+        body { font-family: sans-serif; margin: 0; background-color: #f4f4f4; }
+        header { background-color: #333; color: white; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        header h1 { margin: 0; font-size: 1.5rem; }
+        nav a, nav button { color: white; text-decoration: none; background: #555; padding: 0.5rem 1rem; border-radius: 5px; border: none; cursor: pointer; }
+        main { padding: 1rem; }
+        .belt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem; }
+        .belt-button, .action-button { display: block; background-color: #007bff; color: white; text-align: center; padding: 1.5rem; text-decoration: none; border-radius: 8px; font-weight: bold; }
+        .controls { display: flex; flex-direction: column; gap: 1rem; margin: 2rem 0; }
+        .navigation { display: flex; justify-content: space-between; margin-top: 2rem; }
+        .flashcard { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 1.5rem; margin-top: 1rem; cursor: pointer; }
+        .flashcard .details { display: none; margin-top: 1rem; }
+        .flashcard.is-flipped .details { display: block; }
+        .flashcard.is-flipped .flip-instruction { display: none; }
+        video { max-width: 100%; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="{% url 'core:home' %}" style="color:white;text-decoration:none;">Dojo Manual</a></h1>
+        <nav>
+            {% if user.is_authenticated %}
+                <form action="{% url 'account_logout' %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
+            {% else %}
+                <a href="{% url 'account_login' %}">Login</a>
+            {% endif %}
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- PWA Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register("{% url 'core:service-worker' %}")
+                    .then(reg => console.log('Service worker registered.', reg))
+                    .catch(err => console.log('Service worker registration failed:', err));
+            });
+        }
+    </script>
+</body>
+</html>
