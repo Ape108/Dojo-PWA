@@ -1,0 +1,47 @@
+# --- Environment ---
+# Ignore the .env file because it contains secrets and local configuration.
+# This is the most important rule in this file.
+.env
+
+# --- Virtual Environment ---
+# Ignore the virtual environment directory. It contains thousands of files
+# that are specific to your machine and can be easily recreated by others
+# using the requirements.txt file.
+venv/
+
+# --- Local Database ---
+# Ignore the SQLite database file. Each developer should have their own
+# local database. The production database is separate and managed by GCP.
+db.sqlite3
+*.sqlite3
+
+# --- Django & Python Cache ---
+# Ignore Python's bytecode files and cache directories. These are
+# auto-generated for performance and will be created on each machine.
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# --- Static & Media Files (in production) ---
+# Ignore the directory where `collectstatic` places all static files for
+# production. This is a build artifact, not source code.
+/staticfiles/
+
+# Ignore user-uploaded media files in a local development context if you
+# were to configure a local media root. Your production media is on GCS.
+/media/
+
+# --- IDE / Editor specific files ---
+# Ignore configuration files created by popular editors and IDEs.
+# VS Code
+.vscode/
+# PyCharm
+.idea/
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# --- macOS specific files ---
+# Ignore files automatically created by macOS Finder.
+.DS_Store
