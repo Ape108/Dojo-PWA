@@ -4,7 +4,7 @@ from .models import Belt, Technique
 @admin.register(Belt)
 class BeltAdmin(admin.ModelAdmin):
     list_display = ('name', 'display_order')
-    ordering = ('dispaly_order',)
+    ordering = ('display_order',)
 
 @admin.register(Technique)
 class TechniqueAdmin(admin.ModelAdmin):
