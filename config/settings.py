@@ -63,7 +63,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # <-- ADD THIS LINE
     "allauth.account.middleware.AccountMiddleware",
 
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -149,6 +149,16 @@ STATIC_ROOT = BASE_DIR / "staticfiles" # Directory where collectstatic will plac
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.gcloud.GoogleCloudStorage",
+        "OPTIONS": {},
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 # Default primary key field type
 

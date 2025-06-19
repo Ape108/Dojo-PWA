@@ -35,3 +35,4 @@ rsa==4.9.1
 sqlparse==0.5.3
 typing_extensions==4.14.0
 urllib3==2.5.0
+whitenoise==6.9.0
