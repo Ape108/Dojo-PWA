@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
+    <style>
+        .flashcard .details { display: none; }
+        .flashcard.is-flipped .details { display: block; }
+        .flashcard.is-flipped .flip-instruction { display: none; }
+    </style>
+
     <h2>{{ belt.name }} - Random Flashcard</h2>
     <div class="controls" style="flex-direction:row; justify-content:space-between;">
         <a href="{% url 'belts:detail' belt.pk %}">Back to Belt</a>
@@ -14,19 +20,23 @@
             <h4>Description</h4>
             <p>{{ technique.description|linebreaks }}</p>
             
-            {% if technique.get_video_url %}
-                <h4>Video</h4>
-                <video controls preload="metadata">
-                    <source src="{{ technique.get_video_url }}" type="video/mp4">
+            <!-- Video Section -->
+            <h4>Video</h4>
+            {% if technique.video_file and technique.video_file.url %}
+                <video controls preload="none" style="width: 100%; border-radius: 8px; background-color: #000;"
+                       poster="[https://placehold.co/600x400/1a202c/ffffff?text=](https://placehold.co/600x400/1a202c/ffffff?text=)+"
+                       onerror="this.outerHTML = `<div style='background-color: #4A5568; color: white; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-family: sans-serif;'><p>Video Coming Soon</p></div>'`">
+                    <source src="{{ technique.video_file.url }}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             {% else %}
-                <p><strong>Video coming soon!</strong></p>
+                <div style="background-color: #4A5568; color: white; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-family: sans-serif;">
+                    <p>Video Coming Soon</p>
+                </div>
             {% endif %}
         </div>
     </div>
     <script>
-        // Simple JS to toggle a class on the flashcard container, triggering CSS changes.
         document.getElementById('flashcard').addEventListener('click', function() {
             this.classList.toggle('is-flipped');
         });
