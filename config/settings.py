@@ -91,7 +91,10 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 import dj_database_url
+import os
 
+# By default, use the local SQLite database from the .env file
+import dj_database_url
 DATABASES = {
     'default': dj_database_url.config(default='sqlite:///db.sqlite3')
 }
