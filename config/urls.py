@@ -16,6 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings             # <-- 1. Add this import
+from django.conf.urls.static import static # <-- 2. Add this import
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,3 +29,7 @@ urlpatterns = [
     # Include URLs from our core app (for home page, PWA files)
     path('', include('core.urls')),
 ]
+
+# This pattern tells Django to serve media files during development.
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,3 +1,5 @@
+# belts/views.py
+
 import random
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import DetailView, ListView
@@ -13,7 +15,7 @@ class ApprovedUserRequiredMixin(LoginRequiredMixin):
         if not request.user.is_approved and not request.user.is_staff:
             return render(request, 'account/pending_approval.html')
         return super().dispatch(request, *args, **kwargs)
-    
+
 class BeltDetailView(ApprovedUserRequiredMixin, DetailView):
     """Displays the main page for a single belt."""
     model = Belt
@@ -32,7 +34,7 @@ class BeltDetailView(ApprovedUserRequiredMixin, DetailView):
             context['prev_belt'] = None
             context['next_belt'] = None
         return context
-    
+
 class BeltManualView(ApprovedUserRequiredMixin, DetailView):
     """Displays the embedded PDF training manual for a belt."""
     model = Belt
@@ -45,9 +47,10 @@ class FlashcardSequentialView(ApprovedUserRequiredMixin, ListView):
     context_object_name = 'techniques'
 
     def get_queryset(self):
-        self.belt = get_object_or_404(Belt, pk=self.kwargs['belt_pk'])
+        # FIX: Changed self.kwargs['belt_pk'] to self.kwargs['pk']
+        self.belt = get_object_or_404(Belt, pk=self.kwargs['pk'])
         return Technique.objects.filter(belt=self.belt)
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['belt'] = self.belt
@@ -55,22 +58,28 @@ class FlashcardSequentialView(ApprovedUserRequiredMixin, ListView):
 
 class FlashcardRandomView(ApprovedUserRequiredMixin, DetailView):
     """Displays one random technique from a belt (Flashcard Mode)."""
-    model = Technique # We are getting a single Technique object
+    model = Technique
     template_name = 'belts/flashcard_random.html'
     context_object_name = 'technique'
 
     def get_object(self, queryset=None):
         """Override to select a random technique from the specified belt"""
-        belt_pk = self.kwargs['belt_pk']
+        # FIX: Changed self.kwargs['belt_pk'] to self.kwargs['pk']
+        belt_pk = self.kwargs['pk']
         technique_ids = list(Technique.objects.filter(belt__pk=belt_pk).values_list('id', flat=True))
         if not technique_ids:
-            return None # Handle case where a belt has no techniques
+            return None
         random_id = random.choice(technique_ids)
         return get_object_or_404(Technique, pk=random_id)
-    
+
     def get_context_data(self, **kwargs):
         """Add the belt to the context for navigation."""
         context = super().get_context_data(**kwargs)
-        context['belt'] = get_object_or_404(Belt, pk=self.kwargs['belt_pk'])
+        # FIX: Changed self.kwargs['belt_pk'] to self.kwargs['pk']
+        # Also simplified this logic. If self.object (the technique) exists, we can get the belt from it directly.
+        if self.object:
+            context['belt'] = self.object.belt
+        else:
+            # Fallback for when there are no techniques for a belt.
+            context['belt'] = get_object_or_404(Belt, pk=self.kwargs['pk'])
         return context
-

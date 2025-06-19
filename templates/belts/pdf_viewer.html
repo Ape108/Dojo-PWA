@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>{{ belt.name }} Manual</h2>
+    <a href="{% url 'belts:detail' belt.pk %}">Back to {{ belt.name }} Belt</a>
+    <hr>
+    
+    {% if belt.pdf_file and belt.pdf_file.url %}
+        <iframe src="{{ belt.pdf_file.url }}" style="width: 100%; height: 80vh; border: 1px solid #ccc; margin-top: 1rem;" title="{{ belt.name }} PDF Manual">
+            This browser does not support PDFs. Please download the PDF to view it: <a href="{{ belt.pdf_file.url }}">Download PDF</a>
+        </iframe>
+    {% else %}
+        <p style="margin-top: 1rem;">The PDF manual for this belt has not been uploaded yet.</p>
+    {% endif %}
+{% endblock %}

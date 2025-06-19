@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import dj_database_url
 
 # Load environment variables from .env file
 load_dotenv()
@@ -146,6 +147,11 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / "static"] # Directory for our local static files
 STATIC_ROOT = BASE_DIR / "staticfiles" # Directory where collectstatic will place files for production
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 # Default primary key field type
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'

@@ -3,6 +3,9 @@
 import os
 import sys
 
+# Force production settings in Cloud Run if not set
+if os.environ.get("K_SERVICE") and not os.environ.get("DJANGO_SETTINGS_MODULE"):
+    os.environ["DJANGO_SETTINGS_MODULE"] = "config.production_settings"
 
 def main():
     """Run administrative tasks."""

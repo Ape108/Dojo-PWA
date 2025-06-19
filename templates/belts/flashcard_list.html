@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>{{ belt.name }} - All Techniques (Browse Mode)</h2>
+    <a href="{% url 'belts:detail' belt.pk %}">Back to {{ belt.name }} Belt</a>
+    <hr>
+    
+    {% for technique in techniques %}
+        <div class="flashcard is-flipped" style="cursor: default; margin-bottom: 1rem;">
+            <h3>{{ technique.order_in_belt }}. {{ technique.name }}</h3>
+            
+            <div class="details">
+                <h4>Description</h4>
+                <p>{{ technique.description|linebreaks }}</p>
+                
+                {% if technique.get_video_url %}
+                    <h4>Video</h4>
+                    <video controls preload="metadata" style="max-width: 100%; border-radius: 8px;">
+                        <source src="{{ technique.get_video_url }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                {% else %}
+                    <p><strong>Video coming soon!</strong></p>
+                {% endif %}
+            </div>
+        </div>
+    {% empty %}
+        <p>This belt has no techniques yet.</p>
+    {% endfor %}
+{% endblock %}
