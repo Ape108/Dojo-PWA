@@ -19,6 +19,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the project code into the container
 COPY . .
 
+
+
 # Run collectstatic to gather all static files into one directory for serving
 RUN python manage.py collectstatic --noinput
 

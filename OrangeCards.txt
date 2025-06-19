@@ -1,0 +1,174 @@
+"Kimono Grab";"Attack: Two hand chest grab
+Pin hand to chest with left forearm stepping back on left ft. into fighting horse. Slam under elbows with right horizontal forearm causing to weaken hold and raising off heels. Brush down arms with same forearm breaking hold and causing whiplash in neck. Right knifehand chop to neck. Shuffle in with right forearm smash to head. Switch to right side dropping position with right hammerfist to groin and finish with right rear kick to body. Tiger cover."
+"Sumo";"Attack: Two hand low or waist grab
+Step to left 45 degrees into square horse bringing both elbows overhead and driving both elbows through hold to break. Double knifehand spear to throat and step in on right foot with right vertical forearm to chest. Go to right dropping position with right hammer fist to groin and right rear kick to body for finish. Tiger cover."
+"Inward Defense A";"Attack: Right or left punch
+Step in on rt. ft. with rt. inward block and rt. knifehand chop to neck with left parry. Tiger cover."
+"Inward Defense B";"Attack: Right or left punch
+Step in on rt. ft. with rt. inward block and rt. back knuckle with left parry. Tiger cover."
+"Inward Defense C";"Attack: Right or left punch
+Step in on rt. ft. with rt. inward block and rt. tiger claw across face with left parry. Tiger cover."
+"Inward Defense D";"Attack: Right or left punch
+Step in on rt. ft. with rt. inward block and rt. finger flick to face for fake with left parry. Tiger cover."
+"The Anvil";"Attack: Two hand wrist grab
+Step back into rt. ftg. horse breaking arms upward and outward against hold working against thumbs. Repeat movement to rebreak or knock arms away. Rt. front kick to groin planting forward in slight kneeling position. Double palm strike to abdomen stunting breathe. Pivot to ftg. horse with double palm push to chest driving off. Tiger cover."
+"Crane Kick";"Attack: Right punch on left foot
+Jump to left 45 degrees into crane stance with left inward block. Rt front kick to both knees and then into groin. Tiger cover"
+"Encircling Arms Set 1 A";"Attack: Light progressive tackle
+Step back on left ft. into fighting horse with left palm to shield and right knifehand chop to neck or collar bone. Tiger cover."
+"Encircling Arms Set 1 B";"Attack: Light progressive tackle
+Step back on left ft. into fighting horse with left palm to shield and right hammerfist to side of head. Tiger cover."
+"Encircling Arms Set 1 C";"Attack: Light progressive tackle
+Step back on left ft. into fighting horse with left palm to shield and right forearm smash to head. Tiger cover."
+"Encircling Arms Set 1 D";"Attack: Light progressive tackle
+Step back on left ft. into fighting horse with left palm to shield and right overhead elbow to spine going to dropping position and hammerfist to kidney. Tiger cover."
+"Crashing Elbow A";"Attack: Right punch right foot
+Step in on left ft. with left inward block. Rt. forearm to ribs cowling to left side. Double knifehand chop, rt. to neck and left to ribs or kidney. Tiger cover."
+"Crashing Elbow B";"Attack: Right punch right foot
+Step in on left ft. with left inward block. Rt. forearm to ribs cowling to left side. Double crossed knifehands because attacker is taller or bent over. Tiger cover."
+"Bearhug Free In Front A";"Attack: Progressive bearhug
+Step back on rt. ft. into fighting horse reaching behind grabbing head with left hand. Pull head back and rt. half fist to throat. Tiger cover."
+"Bearhug Free In Front B";"Attack: Progressive bearhug
+Attacker closer, use rt. then left back knuckle to mastoid while stepping back on rt. ft."
+"Bearhug Free In Front C";"Attack: Progressive bearhug
+Attacker almost has hold, use double palm strike to ears and base of jaws."
+"Bearhug Free In Front D";"Attack: Progressive bearhug
+Hold applied, use left hand to support head and jam rt. middle knuckle to hollow point behind ear at base of jaw."
+"Outward Defense A";"Attack: Right or left punch
+Step in on rt. ft. with left parry rt. outward extended block squaring shoulders. Drive rt. knifehand chop to neck or collar bone. Tiger cover."
+"Outward Defense B";"Attack: Right or left punch
+Step in on rt. ft. with left parry rt. outward extended block squaring shoulders. Use rt. vertical punch to head."
+"Outward Defense C";"Attack: Right or left punch
+Step in on rt. ft. with left parry rt. outward extended block squaring shoulders. Use rt. tiger claw to face."
+"Outward Defense D";"Attack: Right or left punch
+Step in on rt. ft. with left parry rt. outward extended block squaring shoulders. Use rt. foreknuckle rake across eyes."
+"Eagle's Beak A";"Attack: Right shoulder grab right side
+Step to left with left hand pin to shoulder and rt. middle knuckle punch to tricep and into armpit. Tiger cover"
+"Eagle's Beak B";"Attack: Right shoulder grab right side
+Step to left with left hand pin to shoulder and rt. middle knuckle punch to tricep and into armpit. Pull in closer with rt. elbow on top of arm and rt. knifehand chop to neck."
+"Kick Blocks A";"Attack: Defense against kicks
+Double downward blocks stepping back into ftg. to both sides blocking outside of kick."
+"Kick Blocks B";"Attack: Defense against kicks
+Step back on rt. ft. into ftg. horse with down'd 'x' block to front kick and catch heel and toe. Twist leg turning attacker over and kick to groin from rear leg with rt. front kick."
+"Kick Blocks C";"Attack: Defense against kicks
+Wheel kick blocks to both sides."
+"The Dancer";"Attack: Two hand choke hold from behind arms extended
+Tucking head, cross back into left hidden ft. with left low rear knifehand chop to groin. Pivot under arms and rt. reverse knifehand chop to groin. Continue pivot to cover."
+"Bearhug Pinned In Front A";"Attack: Bearhug
+Legs apart, rt. knee to groin planting forward with rt. forearm smash to head. Tiger cover."
+"Bearhug Pinned In Front B";"Attack: Bearhug
+Legs together, thumbs into groin and rt. knee to groin cowling to left side. Finish with rt. knife edge thrust to knees using rt. hand to shield."
+"Attacking Circle A";"Attack: Moving to clock
+Step out on rt. ft. with rt. knifehand chop to groin."
+"Attacking Circle B";"Attack: Moving to clock
+Step across left ft. and pivot with rt. reverse knifehand chop to groin."
+"Attacking Circle C1";"Attack: Moving to clock
+Opposite of A."
+"Attacking Circle C2";"Attack: Moving to clock
+Opposite of B."
+"Attacking Circle C3";"Attack: Moving to clock
+Combination of A and B."
+"Attacking Circle C4";"Attack: Moving to clock
+Combination of C1 and C2."
+"Encircling Arms Set 2 A";"Attack: Hard progressive tackle
+Step into left hidden ft. and pivot with rt. knifehand chop across neck and back into. Finish with rt. knife edge kick to knee. Tiger cover."
+"Encircling Arms Set 2 B";"Attack: Hard progressive tackle
+Step into left hidden ft. and pivot with rt. knifehand chop across neck. Attacker gets one arm around. Lock around arm with rt. and grab head with left hand smashing on left rising knee."
+"Encircling Arms Set 2 C";"Attack: Hard progressive tackle
+Like B but no time for chop."
+"Covers A1";"Training Aid
+From ftg. horse, use front kick planting forward after each kick from rear leg. Reverse direction with same kick from closest leg to cover."
+"Covers A2";"Training Aid
+Same as A1 using knife edge kick."
+"Covers B1";"Training Aid
+Step in on left ft. into ftg. horse with left inward block and rt. reverse knifehand to groin, solar plexis, neck, and temple."
+"Covers B2";"Training Aid
+Same as B1 using reverse hammerfist and back knuckle to temple."
+"Covers C";"Training Aid
+Step in on left ft. with combination rt. outward and left fullockout to ribs and head."
+"Full Nelson A";"Attack: Attempted full nelson
+Attacker steps with you, step to right pinning arms under elbows. Rt. heel kick to left knee and rt. knife edge thrust to rt. knee. Tiger cover."
+"Full Nelson B";"Attack: Attempted full nelson
+Attacker remains, step to rt. pinning arms under elbows. Circle left ft. behind attacker hitting solar plexis and chin with left elbow forcing over leg and rt. hammerfist to groin. Tiger cover."
+"Locking The Arm A";"Attack: Arm lock from behind
+Step back on left ft. with left elbow to head and rt. counter grab to wrist. Step out on left ft. turning arm and pulling into rt. front kick to groin or body. Tiger cover."
+"Locking The Arm B";"Attack: Arm lock from behind
+Same as A up to kick. Attacker tries to pull away. Kick off left leg to knee planting forward and left forearm strike to arm. Tiger cover."
+"Locking The Arm C";"Attack: Arm lock from behind
+Elbow misses head. Lock around arm with left crossing back on right ft. Pivot breaking arm possibly with left. Rt hammerfist to head smashing down on rt. rising knee. Tiger cover."
+"Locking The Arm D";"Attack: Arm lock from behind
+Change grab, step back on left ft. with left elbow to ribs or solar plexis and hammerfist to groin. Tiger cover."
+"Locking The Arm E";"Attack: Arm lock from behind
+For upside down grab, step across rt. ft. and pivot with combination rt. hammerfist to groin and left fullockout punch to head. Tiger cover."
+"Crash Of The Eagle Set 1 A";"Attack: Two hand choke hold from behind up close
+Step across rt. ft. cowling to left side. Pivot with rt. elbow over arm to break hold and pin under arms. Rt. rising elbow to chin and rt. back knuckle to face. Tiger cover."
+"Crash Of The Eagle Set 1 B";"Attack: Two hand choke hold from behind up close
+Step across rt. ft. cowling to left side. Pivot with rt. elbow over arm to break hold and pin under arms. Use rt. knifehand chop to neck."
+"Crash Of The Eagle Set 1 C";"Attack: Two hand choke hold from behind up close
+Step across rt. ft. cowling to left side. Pivot with rt. elbow over arm to break hold and pin under arms. Use rt. tiger claw to face."
+"Crash Of The Eagle Set 1 D";"Attack: Two hand choke hold from behind up close
+Step across rt. ft. cowling to left side. Pivot with rt. elbow over arm to break hold and pin under arms. Use rt. hammerfist to groin."
+"Bearhug Free In Back A";"Attack: Defense against hold
+Rt. hand on top, step to rt. with double knuckle strike to back of hand. Grab both sides of hand stepping across rt. and back on rt. ft. forming wrist lock from ftg. horse. Pull into rt. front kick to body. Tiger cover."
+"Bearhug Free In Back B";"Attack: Defense against hold
+Fingers locked together, step to rt. bringing both arms over head and drive both elbows up forearms to break hold by drawing arms apart. Circle left leg behind attacker with left elbow to solar plexis and chin driving over left leg with rt. hammerfist to groin. Tiger cover."
+"Monkey Elbow";"Attack: Right punch right side
+Step to rt. with left parry and rt. outward block. Shuffle in with rt. elbow spear under arm. Brush down arm with back of rt. hand and rt. palm heel to chin or filtrum. Tiger cover."
+"Brush Of Danger A";"Attack: Right shoulder grab from the front left hand
+Step back on left ft. with left hand pin to hand. Rt. forearm strike to elbow with slight lift. Brush down arm with rt. forearm and rt. knifehand chop to neck. Tiger cover."
+"Brush Of Danger B";"Attack: Right shoulder grab from the front left hand
+Step back on left ft. with left hand pin to hand with rt. forearm to elbow. Arm folds so pull in closer with rt. forearm. Finish off with rt. forearm across head. Tiger cover."
+"Brush Of Danger C";"Attack: Right shoulder grab from the front left hand
+Beating the grab, step to left 45 degrees with combination rt. outward block and left palm heel strike to chin. Rt. fullockout punch to body and left to head. Tiger cover."
+"Striking Asp A";"Attack: Two hand grab pulling
+Low grab, left hand covering, step in on rt. ft. with rt. middle knuckle punch to solar plexis. Rt. foreknuckle rake across eyes and rt. knife hand chop to neck. Tiger cover."
+"Striking Asp B";"Attack: Two hand grab pulling
+High grab, left hand covering, step in on rt. ft. with rt. middle knuckle punch to solar plexis. Brush down arms with left hand and rt. knife hand chop to neck. Tiger cover."
+"Striking Asp C";"Attack: Two hand grab pulling
+Smothering grab, left hand covering, step in on rt. ft. with rt. reverse knife hand chop to groin. Tiger cover."
+"Headlock A";"Attack: Headlock applied
+Stepping up on rt. ft. Use double hammerfist strike. Left to kidney or ribs and rt. to groin. Tiger cover."
+"Headlock B";"Attack: Headlock applied
+Stepping up on rt. ft. Use double hammerfist strike. Reach overhead hooking under nose with left first two fingers. Pull head back and rt. hammerfist strike to groin. Tiger cover."
+"Headlock C";"Attack: Headlock applied
+Drop back on left ft. into kneeling position and left reverse knife hand chop to groin striking between legs. Tiger cover."
+"Bearhug Pinned In Back A";"Attack: Bearhug behind, arms pinned
+Step to left jamming rt. elbow to solar plexis. Rt. hammerfist to groin. Tiger cover."
+"Bearhug Pinned In Back B";"Attack: Bearhug behind, arms pinned
+Left hand grab to groin, step to rt. then circle left ft. behind attacker with left elbow to solar plexis and chin forcing over leg with rt. hammerfist to groin. Tiger cover."
+"The Mantis";"Attack: Right punch right side
+Shift to cat stance to rt. side with double knife hand block to punch. Rt. front kick to groin or solar plexis planting forward with rt. forefinger eyeshot. Brush arm down with back of rt. hand. Left knife hand spear to throat. Tiger cover."
+"Broken Staff";"Attack: Right shoulder grab right side, left hand
+Step to left 45 degrees with left hand pin to shoulder and rt. knife hand chop to neck. Left hidden ft. and pivot locking around arm with rt. arm. Rt. back knuckle to head and knife hand chop to neck. Tiger cover."
+"The Cub A";"Attack: One arm choke hold from behind
+Tuck chin, step to left into square horse jamming rt. elbow into solar plexis, hammerfist fist to groin, grab groin with tiger claw ripping up to chin with rt. elbow. Tiger cover."
+"The Cub B";"Attack: One arm choke hold from behind
+Tuck chin, step to left into square horse jamming rt. elbow to solar plexis, hammerfist fist to groin, rt. back knuckle to face because head bent slightly forward. Tiger cover."
+"The Cub C";"Attack: One arm choke hold from behind
+Tuck chin, step to left into square horse jamming rt. elbow into solar plexis, rt. hammerfist to groin at same time with left forefinger eyeshot. Tiger cover."
+"Rising Kick";"Attack: Right punch
+Step to left 45 degrees with left parry and rt. outward extended block. Rt. hand counter grab and pull into rt. front kick to ribs. Pull across into rt. knife edge thrust to legs. Tiger cover."
+"Crash Of The Eagle Set 2 A";"Attack: Two hand choke from behind at angles
+Hands cowled to left side, step across rt. ft. and pivot going over arms and pin under rt. elbow. Rt. forearm across head and back into with rt. elbow. Tiger cover."
+"Crash Of The Eagle Set 2 B";"Attack: Two hand choke from behind at angles
+Starts same as “A” using rt. thumbless fist strike across side of neck circling. Tiger cover."
+"Crash Of The Eagle Set 2 C";"Attack: Two hand choke from behind at angles
+Starts same as “A” using rt. half fist to throat. Tiger cover."
+"Cutting The Pagoda";"Attack: Right Overhead Club
+Step in on left ft. with rt. parry and left upward block. Rt. then left forearm strikes to ribs and finish off with combination left outward block and rt. half fist to throat. Tiger cover."
+"The Bridge A";"Attack: Two hand shoulder grab from behind
+Close in, step to rt. grabbing both hands. Step across left ft. crossing arms from pivot. Break both arms over rt. rising knee and rt. front kick to groin planting forward with rt. forearm smash to head. Tiger cover."
+"The Bridge B";"Attack: Two hand shoulder grab from behind
+Distant, step to rt. grabbing both hands. Step behind left ft. and pivot crossing arms. Rt. front kick to knee planting forward breaking arms. Finish with rt. elbow to solar plexis and hammerfist to groin. Tiger cover."
+"Opponents At Sides A";"Attack: Attackers on both sides
+Step to rt. with left parry and rt. knife hand chop to neck. Step across left ft. and pivot with rt. knife hand chop to neck. Tiger cover."
+"Opponents At Sides B";"Attack: Attackers on both sides
+Step to rt. with left parry and rt. knife hand chop to neck. Step across left ft. and pivot with rt. forefinger rake across eyes and left knife hand chop to neck. Left hidden ft. and pivot with rt. inward block. Finish with rt. front and rear kick combination from cat stance. Tiger cover."
+"Opponents At Sides C";"Attack: Attackers on both sides
+Double shoulder grab, step back slightly on rt. ft. clearing arms. Step back in on rt. ft. locking around both arms. Double back knuckle to ribs and grab both heads slamming together. Tiger cover."
+"Crossing Talon";"Attack: Cross right wrist grab from front
+Counter grab hold with rt. hand stepping in on left ft. with left forearm to arm for control. Pull into left elbow to head. Left overhead elbow to back of head or spine. Tiger cover."
+"Whirling Mantis";"Attack: Left and right punch
+Step in on left ft. with double outward extended block to left punch. Shift to crane stance on left ft. with left inward block against rt. punch. Combination rt. middle knuckle punch to eye and rt. front kick to groin. Tiger cover."
+"Japanese Hand";"Attack: Any right hand grab, or push reaching
+Rt. webhand grab to wrist. Step in on left ft. with left arm over arm grabbing both sides of wrist. Step back on left ft. applying wrist pressure and take down after pivot. Finish with rt. fullockout punch to head with possible knee drop to body. Tiger cover."

@@ -1,0 +1,176 @@
+"Eagle Pin";"Attack: Bearhug free in back, right punch from front
+Left parry and rt. inward block combination folding arm at same time with rt. front kick to groin. Raise arm high planting down on rt. ft. into square horse and throw down arms driving both elbows down on top of wrists and up forearms to break hold. Circle left ft. behind attacker and left elbow to solar plexis, then to chin forcing over left leg with rt. hammerfist to groin. Crane cover."
+
+"Opening Cowl A";"Attack: Two hand choke hold from behind, arms distant
+Arms distant, step back on left ft. and pivot with left outward block at same time with rt. fullockout punch to body. Left to head and rt. to body. Crane cover."
+
+"Opening Cowl B";"Attack: Two hand choke hold from behind, arms close and distant
+Same as 'A' but slightly closer, rt. forearm to body for first strike, left fullockout punch to head, and rt. to body. Crane cover."
+
+"Opening Cowl C1";"Attack: Two hand choke hold from behind, arms close
+Arms close, Done like Crash of the Eagle with left fullockout punch to head. Crane cover."
+
+"Opening Cowl C2";"Attack: Two hand choke hold from behind, arms close
+Same as 'C1', using left half fist to throat. Crane cover."
+
+"Opening Cowl C3";"Attack: Two hand choke hold from behind, arms close
+Same as 'C1', using left palm heel to chin. Crane cover."
+
+"Opening Cowl C4";"Attack: Two hand choke hold from behind, arms close
+Same as 'C1', using left forefinger eyeshot. Crane cover."
+
+"Striking The Serpent";"Attack: Right punch right foot
+Jump into left cat stance 45 degrees with left inward block. Rt. front kick to knee, pivot and rt. knife edge to ribs, pivot and rt. rear kick to head. Crane cover."
+
+"Grasping Talon No. 1 A";"Attack: Right wrist grab from front same side
+Step to rt. 45 degrees into square horse with left knife hand chop to wrist driving down arm to break hold. Rt. fullockout punch to ribs or solar plexis, left to head. Crane cover."
+
+"Grasping Talon No. 1 B";"Attack: Right wrist grab from front same side
+Same as 'A' but use rt. forefinger eyeshot for first strike followed by left fullockout punch to body because arm is in way. Crane cover."
+
+"Purple Mat Work A";"Attack: Shove from behind
+Rt. shoulder roll coming up into ftg. horse facing attacker."
+
+"Purple Mat Work B";"Attack: Shove from behind
+Same as 'A' with rt. wheel kick off back leg because attacker is coming in."
+
+"Purple Mat Work C";"Attack: Shove from behind
+After attacker comes in, drop to ground and swivel on to left side with rt. thrust kick."
+
+"Shackle Break A";"Attack: Two hand wrist grab from behind
+Grab both wrists and pull into rt. rear kick to body. Crane cover."
+
+"Shackle Break B";"Attack: Two hand wrist grab from behind
+Grab both wrists stepping forward on left ft. into ftg. horse and pull rt. arm through into figure eight motion. Pull into body with left hand and drop rt. overhead elbow to spine. Crane cover."
+
+"Bowing To The Buddha A";"Attack: Rising knee
+Kneeling on left knee, rt. forearm block to knee and inward block to move leg out. Rt. knifehand chop to groin. Crane cover."
+
+"Bowing To The Buddha B";"Attack: Rising knee
+Same as 'A', but attacker plants closer. Move in with rt. rising elbow to groin. Crane cover."
+
+"Crane Leap A";"Attack: Right hand shake or hold right hand
+Grab behind elbow with left hand and pull into rt. rising knee to body. Crane cover."
+
+"Crane Leap B";"Attack: Right hand shake or hold right hand
+Left hand punch to back of hand jumping into left crane stance raising arm. Rt. knife edge thrust to leg. Crane cover."
+
+"Temple Shot";"Attack: Right punch
+Step in on left ft. into ftg. horse with left parry or inward block cocking rt. arm back. Rt. fore knuckle rake across temple shifting to bow stance and cowl to left side. Rt. back knuckle to head followed by left forearm to head changing bow to other side. Shift bow back to other side and finish with rt. forearm to head. Crane cover."
+
+"Flashing Dagger";"Attack: Two hand push from front
+Step back on rt. ft. with double outward extended block to open arms. Rt. knife hand chop to ribs, left to neck, rt. knife hand spear to solar plexis, and left knife hand chop to groin. Crane cover."
+
+"Kung-fu Wrist";"Attack: Wrist grab both sides pulling
+Cross over rt. ft. and step out on rt. front kick to person on rt. side. Counter grab arm with left hand crossing over left ft. with rt. Pivot and rt. forearm strike to arm. Crane cover."
+
+"The Sickle";"Attack: Right Punch
+Step in on left ft. with left parry and rt. upward circular block. Circle rt. tiger claw to groin, left tiger claw to face. Shuffle in ripping face back with left claw and finish off with rt. forearm smash to head. Crane cover."
+
+"Prayer Of Death";"Attack: Driving right front kick
+Kneeling on rt. knee, use down'd 'x' block to front kick catching. Turning over leg by ankle and toes, rt. front kick to groin planting forward with double palmheel strike to kidneys forcing to ground. Finish with left heel thrust to spine. Crane cover."
+
+"Circle Of China";"Attack: Left driving front kick
+Down on left knee, rt. downward block in reverse to kick turning attacker around. Pivot on left knee and rt. back knuckle to coccyx. Balance forward on ground leaning on both forearms with rt. rear thrust kick to back. Crane cover."
+
+"The Drawbridge A";"Attack: Left shoulder grab right hand from front
+Left webhand to wrist and rt. ft. 'L' step behind attacker with rt. forearm to shoulder forcing attacker back. Pivot taking attacker down to ground. Finish with rt. fullockout punch to head. Crane cover."
+
+"The Drawbridge B";"Attack: Left shoulder grab right hand from front
+Same as 'A', after take down break wrist over rt. knee, rt. foot stomp to shoulder pulling arm with both hands, hidden ft. and kneel on rt. knee breaking arm over left knee. Crane cover."
+
+"Saluting Right Punch";"Attack: Right Punch
+Step in on left ft. with left parry and rt. upward circular block. Rt. forearm through body or ribs, 'L' step behind attacker on rt. ft. Pivot and rt. back knuckle through ribs or kidney, and finish with rt. webhand punch to throat driving over leg. Crane cover."
+
+"Ascending To Heaven A";"Attack: Rising without hands
+Rising to ft. from lotus position into ftg. horse."
+
+"Ascending To Heaven B";"Attack: Rising without hands
+Same as 'A' using chicken kick to finish."
+
+"Chinese El";"Attack: Two hand choke hold from behind
+Step back on left ft. with combination left outward and rt. fullockout punch to solar plexis. Step in front of attacker with rt. ft. and rt. forearm to arm and pivot forcing to ground by rolling arm. Crane cover."
+
+"The Gift A";"Attack: Right hand grab from front right hand
+Left hand grabbing and step in on left ft. with left forearm to elbow. Rt. hidden ft. and pivot forcing around into rt. wheel kick to body. Crane cover."
+
+"The Gift B";"Attack: Right hand grab from front right hand
+Left hand grab and step in on left ft. raising arm high and left elbow to ribs. Swing arm to other side adjusting left ft. and rt. elbow to ribs. Step through under left on rt. ft. and back on left ft. Pivot and finish with rt. forearm to arm from horse. Crane cover."
+
+"Flashing Wings";"Attack: Right punch
+Step in on left ft. into ftg. horse with left inward block, shift to bow stance with rt. elbow to ribs crossing arms and rt. elbow to head. Rt. then left knife hand chop to neck going through neutral stance to opposite side. Finish with rt. knife hand chop to filtrum from horse stance. Crane cover."
+
+"Snapping Twig";"Attack: Right shoulder grab left hand from front
+Step back on left ft. with double palm strike to arm. Rt. crane parry circling arm to clear. Circle rt. fore knuckle rake across eyes and shuffle in with rt. palmheel overhead down chest to groin with tiger claw. Rip out rising to chin. Crane cover."
+
+"The Dart A";"Attack: Right or left punch
+From left ftg. horse, shuffle back with rt. crane parry clearing arm. Shuffle back in with rt. finger eyeshot. Crane cover."
+
+"The Dart B";"Attack: Right or left punch
+Same as 'A' using rt. vertical punch to head. Crane cover."
+
+"Sleeves Of China";"Attack: Right punch right side
+Step to rt. with left parry and rt. outward block into horse. Shuffle in with rt. elbow to ribs and left fullockout punch to head at same time. Crane cover."
+
+"Legions Of Ming A";"Attack: Right front kick and right punch
+Step back into left ftg. horse with double downward block to kick and left inward block to punch. Finish with rt. fullockout punch to body and left to head. Crane cover."
+
+"Legions Of Ming B";"Attack: Right front kick and right punch
+Same as 'A' using rt. back knuckle to ribs or kidney and left fullockout punch to head because attacker is closer. Crane cover."
+
+"Legions Of Ming C";"Attack: Right front kick and right punch
+Same as 'A' up to blocks. Shuffle in with rt. forearm through ribs, back knuckle to kidney, and reverse knife hand chop to filtrum as attacker tries to get away. Crane cover."
+
+"Blocking The Sun";"Attack: Left then right punch
+Step in on rt. ft. with left parry and rt. upward block. Left palm heel to ribs or solar plexis at same time with rt. inward block to rt. punch from bow stance. Shift to reverse bow stance with rt. knifehand to neck. Crane cover."
+
+"Crossing Guard";"Attack: Offensive move to right side
+Step across rt. ft. with left parry and rt. back knuckle to ribs or solar plexis. Step out on rt. ft. with rt. hand grab to shoulder and pull into left forearm to head from bow stance. Crane cover."
+
+"Wing Break";"Attack: Right shoulder grab left hand from right side
+Step to left with left hand pin to shoulder and rt. middle punch to tricep and then to armpit. Circle rt. arm around behind attacker stepping into left hidden ft. Pivot with hip and throw over hip with rt. punch to head. Crane cover."
+
+"Handstaff A";"Attack: Right overhead club
+Jump to left into crane stance with left parry and rt. outward extended block with rt. wheel kick to body. Crane cover."
+
+"Handstaff B";"Attack: Right overhead club
+Step in on left ft. with upward cross block rt. arm on top. Rt. hand grab to wrist and step in front on left ft. with left forearm to arm rolling with 'El'. Crane cover."
+
+"Handstaff C";"Attack: Right overhead club
+Same as 'B' but stepping back on rt. ft. for forearm because attacker is shorter. Crane cover."
+
+"Handstaff D";"Attack: Right overhead club
+Step in on left ft. with upward cross block and rt. arm on top. Grab wrist with both hands bringing arm down and strike knee with club. Take club with rt. hand and step through under left arm on rt. ft. Left ft. hidden ft. and pivot striking arm with club. Crane cover."
+
+"Arm Sweep";"Attack: Right punch, push, or grab reaching in
+Step in on left ft. into ftg. horse with rt. outward parry block and counter grab with left palm strike to elbow. Left hand slide down arm bringing feet together and step back on left ft. pulling into body with left hand twisting and rt. overhead elbow to back of neck or spine. Crane cover."
+
+"Circle Of Glass";"Attack: Right then left punch
+Step back on left ft. into ftg. horse with rt. inward block and left parry against rt. punch. Move left ft. back 6" with rt. circle block to left punch. Rt. knife hand chop to neck and move left ft. back to original position with rt. back knuckle to face. Shuffle in with rt. forearm smash to head. Crane cover."
+
+"Darkness";"Attack: Right punch from right side
+Step to rt. side into ftg. horse with double hooking parries. Step 45 degrees forward on left ft. into square horse with rt. finger hook to eye pulling into left palm heel to ribs or kidney and finish with rt. back knuckle to head. Crane cover."
+
+"Striking Fang A1";"Attack: Right shoulder grab from rt. side left hand
+Step to left into ftg. horse with left parry and rt. middle knuckle punch to tricep against left grab. rt. outward block clearing arm and shuffle in with rt. forearm to ribs and rt. knife hand chop to groin. Crane cover."
+
+"Striking Fang A2";"Attack: Right shoulder grab from rt. side right hand
+Same as 'A1' against rt. grab and rt. reverse knife hand chop to groin. Crane cover."
+
+"Striking Fang B1";"Attack: Left punch from rt. side
+Step to rt. with left parry and rt. outward block against left punch. Shuffle in with rt. forearm to ribs and rt. knife hand chop to groin. Crane cover."
+
+"Striking Fang B2";"Attack: Right punch from rt. side
+Same as 'B1' using against rt.punch, rt. reverse knife hand chop to groin. Crane cover."
+
+"Breaking The Staff";"Attack: Left shoulder grab right hand from front
+Left hand webhand to wrist at same time with rt. knee to groin and rt. inward block to arm folding pulling in closer. Rt. ft. 'L' step behind attacker with rt. back knuckle to face. Rt. forearm to shoulder forcing back and pivot taking to ground. Finish with rt. fullockout punch to head. Crane cover."
+
+"Kung-Fu Cross A";"Attack: Left punch
+Step back on rt. ft. into ftg. horse with double outward extended block leading with left. Grab with left hand stepping in on rt. ft. with rt. uppercut to arm and back knuckle to groin. Crane cover."
+
+"Kung-Fu Cross B";"Attack: Right punch
+Same block against rt. punch. Rt. front kick to groin or knee planting behind attacker with arm behind shoulders in left hand and rt. webhand punch to throat stretching. Crane cover."
+
+"Dance Of Death";"Attack: Right punch
+Step in on left ft. into ftg. horse with left inward block. Shift to bow stance with rt. reverse hammerfist to groin. Left hand behind knee and picking up leg stepping in on rt. ft. with rt. forearm forcing down to ground. Rt. back knuckles to both knees and knife hand chop to groin. Fold leg and turn attacker over with left heel graze to kidney and step off. Kneel down on rt. knee with rt. knife hand chop to neck. Come up with rt. stomp on back. Step off on left ft. and finish with rt. ft. stomp to head. Crane cover."

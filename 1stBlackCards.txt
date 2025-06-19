@@ -1,0 +1,62 @@
+"Feather And Iron";"Attack: Right knife lunge
+Move to left to avoid knife using rt. cut to wrist and left stamp to elbow. Rt. hidden ft. and pivot with rt. closed throw to head. Step around on left ft. with left dot to face. Step in behind on rt. ft. with rt. forearm under neck and forcing head forward with left hand to snap neck."
+
+"Whirling Iron";"Attack: Any attack from the right side or front
+Crossing over rt. ft. into twisted stance knocking down over top with double closed hand throw to rt. side. Short rt. ft. forward with left then rt. fullockout punch to head. Extend in with rt. hammerfist to groin. Rise up with double throw under face going into rt. crane stance followed by double dot to face driving into left knee to groin. Left then rt. dot to head stepping back on left ft. into ftg. horse stance for cover."
+
+"Twisting Throw";"Attack: Any attack from front
+Step in on left ft. with rt. parry and left throw to face. Turn backward 360 degrees with rt. throw to head and turning back with left throw to head. Rt. dot to face and finish with left scoop kick to groin stepping back to cover."
+
+"Striking Cat";"Attack: Right punch
+Moving in slight angle on left ft. into twisted stance with rt. ft. and left parry. Rt. reverse knifehand chop to face. Reverse spin into attacker with left back knuckle to solar plexis and rt. dot to face. Rt. hand grab to head pulling into rt. lift kick to groin and left knifehand chop to neck overhead. Cover."
+
+"Cobra Movement";"Attack: Defensive movement
+Starting from twisted stance to left side, work parries pivoting at same time working hand exercises. Come out into dragon drop. Shift to other side and repeat."
+
+"Gung-Fu Turning Exercise A";"Attack: Turning exercise
+Starting from rt. ftg. horse in cover, rt. and left double parry with rt. crescent kick planting forward into twisted stance working parries. Step back on rt. ft. circling overhead and iron butterfly from bow stance."
+
+"Gung-Fu Turning Exercise B";"Attack: Turning exercise
+Starts same as \"A\" but adding extra turn at end before butterfly."
+
+"Circling Crane";"Attack: Right punch left foot
+Step in on rt. ft. with left parry into ftg. horse using rt. then left throw to head followed by rt. foreknuckle rake to face. Left fullockout punch to face. Finish with left crescent kick to head planting behind and sweep from left bow."
+
+"Strike Of The Cobra";"Attack: Offensive movement
+Step in on rt. ft. with left parry rt. overhead claw to face. Step back on rt. ft. with rt. rising back knuckle to face and back in on left ft. with left dot to face. Circle rt. ft. behind with rt. forearm forcing to ground over bow. Short leap and rt. knee drop to body with rt. back knuckle to head."
+
+"Manchurian Tiger";"Attack: Right punch
+Step to left with left parry and rt. outward extended block. Regrab rt. hand and left parry separating arm with rt. ft. sweep. Circle rt. ft. behind with left hand grab to shoulder and takedown over rt. bow stance and rt. forearm. Left then rt. ft. stomp to body. Rt. knee drop to body with rt. webhand to throat and rip out. Left dot to face for finish."
+
+"Striking Mongoose";"Attack: Left and right hook
+Step back on rt. ft. into Chinese bow with hands drawn away to avoid left hook. Shift back in with left upward block and rt. uppercut to ribs or solar plexis. Shift knees with left stamp to kidney, rt. rising back knuckle to face, rt. then left fullockout punch to body."
+
+"Circling Dragons";"Attack: Any grab or punch from front
+Rt. parry with rt. then left circling claws to face and rt. front kick to groin planting forward with rt. forearm strike to head. Rt. hand grab to shoulder planting back on rt. ft. pulling back and left leaping knee to body with left knifehand chop to neck. Finish with rt. downward wheel kick to head."
+
+"Snow Leopard";"Attack: Offensive movement
+Rt. ft. slightly forward with double stamp to base of jaws. Rip out face with double claws and repeating stamps. Grab head with both hands and pull down into rt. rising knee and scoop out groin. Rt. hidden ft. and pivot with rt. elbow to head, hammerfist to groin, claw to groin ripping out."
+
+"Eagle In His Roost";"Attack: Left kick and punch from behind
+Slight start on rt. ft. and step out on left ft. hidden ft. facing opposite direction with rt. downward block. Pivot with rt. outward and left fullockout punch to head. Step through on rt. ft. with rt. fullockout punch to head followed by left overhead elbow to chest going into twisted stance. Left hand grab to shoulder stepping back on rt. ft. Pull and circle rt. ft. behind attacker and takedown over rt. bow."
+
+"Driving Spears";"Attack: Right shoulder grab left hand from front
+Left hand pin to shoulder with rt. stamp to elbow and rt. front kick to knee. Plant forward on rt. ft. pulling in with rt. elbow. Rt. rising elbow to chin and rt. dot to face. Rt. hidden ft. and pivot dropping on rt. knee and breaking back over left knee."
+
+"Turning Wrist";"Attack: Left then right punch
+Step back slightly on rt. ft. into reverse bow with rt. throw block to left punch. Shift bow forward with same block to rt. punch. Rt. counter grab pulling into left eyeshot and rt. lift kick to groin."
+
+"Attack Of The Mandarin";"Attack: Offensive movement
+Step in on rt. ft. with left parry and rt. Chinese punch to head. Backward turn 360 degrees into with rt. knifehand chop to neck and left back knuckle to body followed by left dot to face. Left hand grab to shoulder and circle rt. ft. behind. Takedown over rt. bow with rt. forearm. Rt. knee drop to body and rt. dot to face."
+
+"Dance Of The Crane";"Attack: Right punch
+Step in on rt. ft. with combination rt. Chinese punch and left knifehand chop to arm. Left hand grab to wrist and rt. hand shoulder grab. Shuffle in with rt. knee to body. Plant behind legs and cross back on left ft. Pivot and throw to ground. Left heel graze to head and rt. downward wheel kick to groin."
+
+"Tai Defense";"Attack: Right kick right punch from behind
+Step forward on left ft. then into rt. hidden ft. with rt. downward block. Rt. outward block and counter grab shifting into horse stance with left eyeshot. Shuffle in with double shoulder grab and slam left rising knee into spine."
+
+"Eyes Of The Tiger";"Attack: Any forward grab or push
+Start in on left ft. with double shooting back knuckle to head. Then back around both arms locking with rt. rising knee to groin. Plant back into rt. hidden ft. Pivot and rt. elbow into spine. Loop rt. arm overhead around neck and full hip throw to ground and left knee drop to body."
+
+"Mings Feet";"Attack: Right punch on short right foot
+Step to left at slight angle with left parry and rt. inward block. Rt. hand counter grab stepping back on rt. ft. with left stamp to head. Rt. ft. sweep to front leg and shift to rt. lifting knife edge to groin." 
