@@ -64,14 +64,21 @@
         padding-top: 1.5rem;
     }
 
-    .belt-nav a {
+    .belt-nav-link {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
         color: var(--text-main);
         text-decoration: none;
-        transition: color 0.3s ease;
+        transition: all 0.3s ease;
     }
 
-    .belt-nav a:hover {
-        color: var(--belt-accent-color);
+    .belt-nav-link:hover {
+        background-color: var(--nav-link-accent-color, var(--belt-accent-color));
+        border-color: var(--nav-link-accent-color, var(--belt-accent-color));
+        color: #FFFFFF;
+        transform: translateY(-2px);
     }
 </style>
 
@@ -93,12 +100,12 @@
     <div class="belt-nav">
         <div>
             {% if prev_belt %}
-                <a href="{% url 'belts:detail' prev_belt.pk %}">&larr; {{ prev_belt.name }}</a>
+                <a href="{% url 'belts:detail' prev_belt.pk %}" class="belt-nav-link" style="--nav-link-accent-color: {{ prev_belt.color }};">&larr; {{ prev_belt.name }}</a>
             {% endif %}
         </div>
         <div>
             {% if next_belt %}
-                <a href="{% url 'belts:detail' next_belt.pk %}">{{ next_belt.name }} &rarr;</a>
+                <a href="{% url 'belts:detail' next_belt.pk %}" class="belt-nav-link" style="--nav-link-accent-color: {{ next_belt.color }};">{{ next_belt.name }} &rarr;</a>
             {% endif %}
         </div>
     </div>
