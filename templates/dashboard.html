@@ -1,0 +1,94 @@
+<!-- templates/dashboard.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .belt-rack {
+        max-width: 400px;
+        margin: 2rem auto;
+        padding: 20px 10px;
+        border-radius: 10px;
+        background-color: #DEB887;
+        border: 4px solid #8B4513;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2), inset 0 0 15px rgba(0,0,0,0.3);
+    }
+    .belt-slot, .group-slot {
+        margin-bottom: 15px;
+        background-color: #C2A47C;
+        border-radius: 5px;
+        padding: 5px;
+    }
+    .belt-link {
+        display: block;
+        padding: 20px;
+        text-align: center;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #FFFFFF;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        border: 2px solid rgba(0,0,0,0.2);
+    }
+    .belt-link:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    .group-summary {
+        padding: 20px;
+        text-align: center;
+        border-radius: 5px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #FFFFFF;
+        cursor: pointer;
+        outline: none;
+        border: 2px solid rgba(0,0,0,0.2);
+    }
+    .group-details {
+        padding: 15px 5px 5px 5px;
+    }
+    /* Hide the default arrow marker */
+    .group-summary::-webkit-details-marker {
+        display: none;
+    }
+    .group-summary::marker {
+        display: none;
+    }
+</style>
+
+<div class="text-center mb-8">
+    <h2 class="text-2xl md:text-3xl" style="color: var(--text-heading);">Select a Belt</h2>
+</div>
+
+<div class="belt-rack">
+    {# Render ungrouped belts first #}
+    {% for belt in ungrouped_belts %}
+        <div class="belt-slot">
+            <a href="{% url 'belts:detail' belt.pk %}" class="belt-link" style="background-color: {{ belt.color }};">
+                <span>{{ belt.name }}</span>
+            </a>
+        </div>
+    {% endfor %}
+
+    {# Render grouped belts inside collapsible sections #}
+    {% for group in belt_groups %}
+        <details class="group-slot">
+            <summary class="group-summary" style="background-color: {{ group.color }};">{{ group.name }}</summary>
+            <div class="group-details">
+                {% for belt in group.belts.all %}
+                    <div class="belt-slot">
+                        <a href="{% url 'belts:detail' belt.pk %}" class="belt-link" style="background-color: {{ belt.color }};">
+                            <span>{{ belt.name }}</span>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </details>
+    {% endfor %}
+    
+    {% if not ungrouped_belts and not belt_groups %}
+        <p class="text-center" style="color: var(--text-main);">No belts found.</p>
+    {% endif %}
+</div>
+{% endblock %} 

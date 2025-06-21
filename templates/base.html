@@ -125,20 +125,22 @@
         <!-- Header -->
         <header class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div class="flex justify-between items-center">
-                <a href="{% url 'core:home' %}" class="text-xl font-bold tracking-tight transition-colors hover-text-gold" style="color: var(--text-heading);">
-                    Chuan Fa
+                <a href="{% url 'core:dashboard' %}" class="text-xl font-bold tracking-tight transition-colors hover-text-gold" style="color: var(--text-heading);">
+                    Chuan Fa Academy
                 </a>
                 <nav>
                     {% if user.is_authenticated %}
-                        <!-- CORRECTED: This is now a simple link to the confirmation page, not a POST form. -->
-                        <a href="{% url 'account_logout' %}" class="flex items-center gap-2 text-sm transition-colors hover-text-gold" style="color: var(--text-main);">
-                            <span>Logout</span>
-                            <!-- CORRECTED Heroicon: ArrowLeftOnRectangle -->
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                              <path fill-rule="evenodd" d="M3 4.25A2.25 2.25 0 0 1 5.25 2h5.5A2.25 2.25 0 0 1 13 4.25v2a.75.75 0 0 1-1.5 0v-2a.75.75 0 0 0-.75-.75h-5.5a.75.75 0 0 0-.75.75v11.5c0 .414.336.75.75.75h5.5a.75.75 0 0 0 .75-.75v-2a.75.75 0 0 1 1.5 0v2A2.25 2.25 0 0 1 10.75 18h-5.5A2.25 2.25 0 0 1 3 15.75V4.25Z" clip-rule="evenodd" />
-                              <path fill-rule="evenodd" d="M16.72 9.47a.75.75 0 0 1 1.06 0l.72.72a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L8.94 11.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0l.72.72Z" clip-rule="evenodd" />
-                            </svg>
-                        </a>
+                        <form method="post" action="{% url 'account_logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="flex items-center gap-2 text-sm transition-colors hover-text-gold" style="color: var(--text-main); background: none; border: none; padding: 0; cursor: pointer;">
+                                <span>Logout</span>
+                                <!-- Heroicon: ArrowLeftOnRectangle -->
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                  <path fill-rule="evenodd" d="M3 4.25A2.25 2.25 0 0 1 5.25 2h5.5A2.25 2.25 0 0 1 13 4.25v2a.75.75 0 0 1-1.5 0v-2a.75.75 0 0 0-.75-.75h-5.5a.75.75 0 0 0-.75.75v11.5c0 .414.336.75.75.75h5.5a.75.75 0 0 0 .75-.75v-2a.75.75 0 0 1 1.5 0v2A2.25 2.25 0 0 1 10.75 18h-5.5A2.25 2.25 0 0 1 3 15.75V4.25Z" clip-rule="evenodd" />
+                                  <path fill-rule="evenodd" d="M16.72 9.47a.75.75 0 0 1 1.06 0l.72.72a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L8.94 11.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0l.72.72Z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </form>
                     {% else %}
                         <a href="{% url 'account_login' %}" class="text-sm transition-colors hover-text-gold" style="color: var(--text-main);">Login</a>
                     {% endif %}

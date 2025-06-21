@@ -1,0 +1,12 @@
+{% extends "admin/change_list.html" %}
+{% load i18n %}
+
+{# Add a save button at the top of the list for better usability #}
+{% block result_list %}
+  {% if cl.list_editable %}
+    <div class="submit-row" style="margin-bottom: 1rem;">
+        <input type="submit" name="_save" class="default" value="{% trans 'Save' %}">
+    </div>
+  {% endif %}
+  {{ block.super }}
+{% endblock %} 

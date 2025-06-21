@@ -1,42 +1,106 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl">{{ belt.name }} Belt</h2>
+<style>
+    /* Define the accent color at the root, so it can be used anywhere. Fallback to a default gold. */
+    :root {
+        --belt-accent-color: {{ belt.color|default:'#B48A3A' }};
+    }
+
+    /* A container for the main content area */
+    .content-panel {
+        max-width: 700px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background-color: var(--bg-dark-secondary); /* Using a variable from base.html */
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Styling for the main header */
+    .belt-title {
+        color: var(--text-heading);
+        font-size: 2.5rem;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 2rem;
+        /* A subtle underline using the belt's color */
+        border-bottom: 3px solid var(--belt-accent-color);
+        padding-bottom: 0.5rem;
+        display: inline-block;
+    }
+
+    /* Styling for the main navigation buttons */
+    .action-button {
+        display: block;
+        width: 100%;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        text-align: center;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-main);
+        background-color: transparent;
+        border: 2px solid var(--border-color);
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    /* Use the belt's accent color on hover */
+    .action-button:hover {
+        color: #FFFFFF;
+        background-color: var(--belt-accent-color);
+        border-color: var(--belt-accent-color);
+        transform: translateY(-2px);
+    }
+
+    /* Styling for the next/previous belt navigation */
+    .belt-nav {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 3rem;
+        border-top: 1px solid var(--border-color);
+        padding-top: 1.5rem;
+    }
+
+    .belt-nav a {
+        color: var(--text-main);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .belt-nav a:hover {
+        color: var(--belt-accent-color);
+    }
+</style>
+
+<div class="content-panel">
+    <div class="text-center">
+        <h1 class="belt-title">{{ belt.name }}</h1>
     </div>
 
     <!-- Action Buttons -->
-    <div class="max-w-sm mx-auto flex flex-col gap-4">
+    <div>
         {% if belt.pdf_file %}
-            <a href="{% url 'belts:manual' belt.pk %}" class="block w-full p-4 text-center font-semibold border rounded-lg transition-all duration-300 ease-in-out hover-border-gold hover:text-white" style="color: var(--text-main); border-color: var(--border-color);">
-                Training Manual (PDF)
-            </a>
+        <a href="{% url 'belts:manual' belt.pk %}" class="action-button">View Manual</a>
         {% endif %}
-        <a href="{% url 'belts:flashcard_sequential' belt.pk %}" class="block w-full p-4 text-center font-semibold border rounded-lg transition-all duration-300 ease-in-out hover-border-gold hover:text-white" style="color: var(--text-main); border-color: var(--border-color);">
-            Browse Techniques
-        </a>
-        <a href="{% url 'belts:flashcard_random' belt.pk %}" class="block w-full p-4 text-center font-semibold border rounded-lg transition-all duration-300 ease-in-out hover-border-gold hover:text-white" style="color: var(--text-main); border-color: var(--border-color);">
-            Random Flashcard
-        </a>
+        <a href="{% url 'belts:flashcard_sequential' belt.pk %}" class="action-button">Browse Techniques</a>
+        <a href="{% url 'belts:flashcard_random' belt.pk %}" class="action-button">Random Flashcard</a>
     </div>
 
-    <!-- Navigation between belts -->
-    <div class="flex justify-between items-center mt-16 md:mt-24 text-sm">
+    <!-- Navigation -->
+    <div class="belt-nav">
         <div>
             {% if prev_belt %}
-                <a href="{% url 'belts:detail' prev_belt.pk %}" class="flex items-center gap-2 transition-colors duration-300 ease-in-out hover-text-gold" style="color: var(--text-main);">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 0 1-.02 1.06L8.832 10l3.938 3.71a.75.75 0 1 1-1.04 1.08l-4.5-4.25a.75.75 0 0 1 0-1.08l4.5-4.25a.75.75 0 0 1 1.06.02Z" clip-rule="evenodd" /></svg>
-                    <span>{{ prev_belt.name }}</span>
-                </a>
+                <a href="{% url 'belts:detail' prev_belt.pk %}">&larr; {{ prev_belt.name }}</a>
             {% endif %}
         </div>
         <div>
             {% if next_belt %}
-                <a href="{% url 'belts:detail' next_belt.pk %}" class="flex items-center gap-2 transition-colors duration-300 ease-in-out hover-text-gold" style="color: var(--text-main);">
-                    <span>{{ next_belt.name }}</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 0 1 .02-1.06L11.168 10 7.23 6.29a.75.75 0 1 1 1.04-1.08l4.5 4.25a.75.75 0 0 1 0 1.08l-4.5 4.25a.75.75 0 0 1-1.06-.02Z" clip-rule="evenodd" /></svg>
-                </a>
+                <a href="{% url 'belts:detail' next_belt.pk %}">{{ next_belt.name }} &rarr;</a>
             {% endif %}
         </div>
     </div>
+</div>
 {% endblock %}

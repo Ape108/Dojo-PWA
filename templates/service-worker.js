@@ -1,13 +1,11 @@
 // templates/service-worker.js
 
-// By changing the cache name from v1 to v2, we force the service worker to
-// discard the old cache (with the old homepage) and create a new one.
-const CACHE_NAME = 'dojo-manual-cache-v2';
+// Increment the cache name to v4 to ensure the new service worker logic is applied.
+const CACHE_NAME = 'dojo-manual-cache-v4';
 
+// We still pre-cache the landing page for offline fallback.
 const URLS_TO_CACHE = [
-  '{% url "core:home" %}',
-  // It's also a good idea to cache the base structure, but for now,
-  // just caching the homepage URL is enough to fix the issue.
+  '{% url "core:landing" %}',
 ];
 
 self.addEventListener('install', event => {
@@ -42,13 +40,24 @@ self.addEventListener('activate', event => {
   );
 });
 
-
 self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        // If we have a cached version, return it. Otherwise, fetch from the network.
-        return response || fetch(event.request);
+  // For navigation requests (i.e., fetching an HTML page), use a network-first strategy.
+  // This ensures the user always gets the latest version of the page with a valid CSRF token if they are online.
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request).catch(() => {
+        // If the network request fails (e.g., user is offline), serve the cached landing page.
+        return caches.match('{% url "core:landing" %}');
       })
+    );
+    return;
+  }
+
+  // For all other requests (like static assets), a cache-first strategy is appropriate.
+  // These files don't change often and don't contain dynamic data like CSRF tokens.
+  event.respondWith(
+    caches.match(event.request).then(response => {
+      return response || fetch(event.request);
+    })
   );
 });

@@ -1,44 +1,107 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="mb-12">
-        <a href="{% url 'belts:detail' belt.pk %}" class="inline-flex items-center gap-2 text-sm transition-colors duration-300 ease-in-out hover-text-gold mb-4" style="color: var(--text-main);">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 0 1-.02 1.06L8.832 10l3.938 3.71a.75.75 0 1 1-1.04 1.08l-4.5-4.25a.75.75 0 0 1 0-1.08l4.5-4.25a.75.75 0 0 1 1.06.02Z" clip-rule="evenodd" /></svg>
-            <span>Back to {{ belt.name }} Belt</span>
+<style>
+    /* Inherit the accent color from the parent belt */
+    :root {
+        --belt-accent-color: {{ belt.color|default:'#B48A3A' }};
+    }
+
+    .content-panel {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2rem 2.5rem;
+        background-color: var(--bg-dark-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .page-header {
+        text-align: center;
+        margin-bottom: 2.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .belt-title-link {
+        font-size: 2rem;
+        font-weight: bold;
+        color: var(--belt-accent-color);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    .belt-title-link:hover {
+        color: #FFFFFF;
+    }
+
+    .page-subtitle {
+        font-size: 1.25rem;
+        color: var(--text-main);
+        margin-top: 0.5rem;
+    }
+    
+    .technique-card {
+        background-color: var(--bg-dark);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        transition: border-color 0.3s ease;
+    }
+    .technique-card:hover {
+        border-color: var(--belt-accent-color);
+    }
+
+    .technique-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--text-heading);
+        margin-bottom: 1rem;
+    }
+
+    .technique-description {
+        color: var(--text-main);
+        line-height: 1.6;
+    }
+</style>
+
+<div class="content-panel">
+    <div class="page-header">
+        <a href="{% url 'belts:detail' belt.pk %}" class="belt-title-link">
+            {{ belt.name }}
         </a>
-        <h2 class="text-3xl md:text-4xl">{{ belt.name }} &mdash; Browse All</h2>
+        <p class="page-subtitle">Technique List</p>
     </div>
 
-    <div class="space-y-8">
-        {% for technique in techniques %}
-            <div class="animate-list-item border rounded-lg p-6 md:p-8" style="--delay-index: {{ forloop.counter0 }}; border-color: var(--border-color);">
-                <!-- Technique Title -->
-                <h3 class="font-technique-name text-2xl mb-4">{{ technique.order_in_belt }}. {{ technique.name }}</h3>
-                
-                <!-- Description -->
-                <div class="prose prose-invert max-w-none text-gray-300 mb-6">
-                    <p>{{ technique.description|linebreaks }}</p>
-                </div>
-
-                <!-- Video Player -->
-                {% if technique.video_file and technique.video_file.url %}
+    {% for technique in techniques %}
+        <div class="technique-card">
+            <h3 class="technique-title">
+                {{ technique.order_in_belt }}. {{ technique.name }}
+            </h3>
+            <p class="technique-description">{{ technique.description|linebreaks }}</p>
+            
+            {% if technique.video_enabled %}
+            <!-- Video Player Section -->
+            <div class="mt-4">
+                {% if technique.video_file %}
                     <div class="aspect-video bg-black rounded-lg overflow-hidden">
-                        <video controls preload="none" class="w-full h-full transition-opacity duration-500 opacity-0" 
-                               poster="https://placehold.co/1280x720/111827/374151?text=+"
-                               onloadstart="this.style.opacity=1"
-                               onerror="this.parentElement.innerHTML = `<div class='w-full h-full flex items-center justify-center text-sm' style='background-color: var(--bg-dark); color: var(--border-color);'><p>Video Coming Soon</p></div>'`">
+                        <video controls preload="none" class="w-full h-full" poster="https://placehold.co/1280x720/111827/374151?text=Loading+Video...">
                             <source src="{{ technique.video_file.url }}" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
                     </div>
                 {% else %}
-                    <div class="aspect-video rounded-lg flex items-center justify-center text-sm" style="background-color: var(--bg-dark); border: 1px dashed; border-color: var(--border-color); color: var(--border-color);">
+                    <div class="aspect-video rounded-lg flex items-center justify-center text-sm" style="background-color: var(--bg-dark); border: 1px dashed var(--border-color); color: var(--border-color);">
                         <p>Video Coming Soon</p>
                     </div>
                 {% endif %}
             </div>
-        {% empty %}
-            <p class="text-center" style="color: var(--text-main);">This belt has no techniques yet.</p>
-        {% endfor %}
-    </div>
+            {% endif %}
+        </div>
+    {% empty %}
+        <p class="text-center" style="color: var(--text-main);">No techniques have been added for this belt yet.</p>
+    {% endfor %}
+</div>
+
 {% endblock %}

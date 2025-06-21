@@ -1,0 +1,75 @@
+<!-- templates/landing.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Chuan Fa App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Lora:wght@500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #111827;
+            --border-color: #374151;
+            --text-main: #E5E7EB;
+            --text-heading: #F9FAFB;
+            --accent-gold: #B48A3A;
+            --font-sans: 'Inter', sans-serif;
+            --font-serif: 'Lora', serif;
+        }
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at 10% 20%, rgba(180, 138, 58, 0.1), transparent 40%),
+                        radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.1), transparent 40%);
+            z-index: -1;
+            animation: aurora 25s linear infinite;
+        }
+        @keyframes aurora {
+            0% { transform: scale(1.1) rotate(0deg); }
+            50% { transform: scale(1.4) rotate(10deg); }
+            100% { transform: scale(1.1) rotate(0deg); }
+        }
+    </style>
+</head>
+<body class="antialiased flex items-center justify-center min-h-screen">
+    <main class="w-full max-w-md p-8 space-y-8">
+        <div class="text-center">
+            <h1 class="font-bold text-4xl tracking-tight" style="font-family: var(--font-serif); color: var(--text-heading);">Chuan Fa</h1>
+            <p class="mt-2 text-lg" style="color: var(--text-main);">Your dedicated training companion.</p>
+        </div>
+        
+        {% load i18n socialaccount %}
+        {% provider_login_url "google" as google_login_url %}
+        <a href="{{ google_login_url }}" class="w-full flex items-center justify-center gap-3 p-3 font-semibold border rounded-lg transition-all duration-300 ease-in-out hover:border-b48a3a hover:text-white" style="border-color: var(--border-color); color: var(--text-main);">
+            <svg class="w-5 h-5" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><path fill="currentColor" d="M488 261.8C488 403.3 381.5 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 126 23.4 172.9 61.5l-62.7 62.7C337 97.4 294.6 80 248 80 142.1 80 64 165.2 64 256s78.1 176 184 176c98.2 0 176-79.8 176-176 0-24.4-4.5-47.7-12.2-68.6H248v-85.3h236.1c2.3 12.7 3.9 25.9 3.9 39.7z"></path></svg>
+            Sign in with Google
+        </a>
+
+        <div class="relative flex items-center">
+            <div class="flex-grow border-t" style="border-color: var(--border-color);"></div>
+            <span class="flex-shrink mx-4 text-xs" style="color: var(--border-color);">Admin</span>
+            <div class="flex-grow border-t" style="border-color: var(--border-color);"></div>
+        </div>
+
+        <form class="login space-y-4" method="POST" action="{% url 'account_login' %}">
+            {% csrf_token %}
+            <input type="text" name="login" placeholder="Username" required class="block w-full px-3 py-2 border rounded-md bg-transparent focus:outline-none focus:ring-1" style="border-color: var(--border-color); color: var(--text-heading); caret-color: var(--accent-gold); --tw-ring-color: var(--accent-gold);">
+            <input type="password" name="password" placeholder="Password" required class="block w-full px-3 py-2 border rounded-md bg-transparent focus:outline-none focus:ring-1" style="border-color: var(--border-color); color: var(--text-heading); caret-color: var(--accent-gold); --tw-ring-color: var(--accent-gold);">
+            <button type="submit" class="w-full p-3 font-semibold border rounded-lg transition-all duration-300 ease-in-out hover:border-b48a3a hover:text-white" style="border-color: var(--border-color); color: var(--text-main);">Sign In</button>
+        </form>
+    </main>
+</body>
+</html> 
