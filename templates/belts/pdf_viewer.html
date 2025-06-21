@@ -1,15 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>{{ belt.name }} Manual</h2>
-    <a href="{% url 'belts:detail' belt.pk %}">Back to {{ belt.name }} Belt</a>
-    <hr>
+    <div class="mb-8">
+        <a href="{% url 'belts:detail' belt.pk %}" class="inline-flex items-center gap-2 text-sm transition-colors duration-300 ease-in-out hover-text-gold mb-4" style="color: var(--text-main);">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 0 1-.02 1.06L8.832 10l3.938 3.71a.75.75 0 1 1-1.04 1.08l-4.5-4.25a.75.75 0 0 1 0-1.08l4.5-4.25a.75.75 0 0 1 1.06.02Z" clip-rule="evenodd" /></svg>
+            <span>Back to {{ belt.name }} Belt</span>
+        </a>
+        <h2 class="text-3xl md:text-4xl">{{ belt.name }} Manual</h2>
+    </div>
     
     {% if belt.pdf_file and belt.pdf_file.url %}
-        <iframe src="{{ belt.pdf_file.url }}" style="width: 100%; height: 80vh; border: 1px solid #ccc; margin-top: 1rem;" title="{{ belt.name }} PDF Manual">
-            This browser does not support PDFs. Please download the PDF to view it: <a href="{{ belt.pdf_file.url }}">Download PDF</a>
-        </iframe>
+        <div class="aspect-[8.5/11] w-full border rounded-lg overflow-hidden" style="border-color: var(--border-color);">
+            <iframe src="{{ belt.pdf_file.url }}" class="w-full h-full" title="{{ belt.name }} PDF Manual">
+                <p class="p-8">Your browser does not support embedded PDFs. Please <a href="{{ belt.pdf_file.url }}" class="font-bold hover-text-gold">download the PDF</a> to view it.</p>
+            </iframe>
+        </div>
     {% else %}
-        <p style="margin-top: 1rem;">The PDF manual for this belt has not been uploaded yet.</p>
+        <p class="text-center py-16" style="color: var(--text-main);">The PDF manual for this belt has not been uploaded yet.</p>
     {% endif %}
 {% endblock %}

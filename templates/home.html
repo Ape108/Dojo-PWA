@@ -1,11 +1,21 @@
 {% extends "base.html" %}
+
 {% block content %}
-    <h2>Select a Belt</h2>
-    <div class="belt-grid">
+    <div class="text-center mb-12">
+        <h2 class="text-2xl md:text-3xl">Select a Belt</h2>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
         {% for belt in belts %}
-            <a href="{% url 'belts:detail' belt.pk %}" class="belt-button">{{ belt.name }}</a>
+            <a href="{% url 'belts:detail' belt.pk %}" 
+               class="group block p-6 text-center border transition-all duration-300 ease-in-out hover-border-gold"
+               style="border-color: var(--border-color); border-radius: 8px; animation: fade-in-up 0.5s ease-out forwards; opacity: 0; animation-delay: calc({{ forloop.counter0 }} * 100ms);">
+                <span class="text-lg font-semibold transition-colors duration-300 ease-in-out group-hover:text-white" style="color: var(--text-main);">
+                    {{ belt.name }}
+                </span>
+            </a>
         {% empty %}
-            <p>No belts have been configured by an administrator yet.</p>
+            <p class="col-span-full text-center" style="color: var(--text-main);">No belts have been configured by an administrator yet.</p>
         {% endfor %}
     </div>
 {% endblock %}

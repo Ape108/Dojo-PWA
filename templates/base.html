@@ -3,53 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dojo Training Manual</title>
-    <!-- PWA Manifest Link -->
+    <!-- Page Title -->
+    <title>Chuan Fa App</title>
+    
+    <!-- PWA Manifest & Theme Color -->
     <link rel="manifest" href="{% url 'core:manifest' %}">
-    <meta name="theme-color" content="#333333">
+    <meta name="theme-color" content="#111827">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Inter and Lora -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Lora:wght@500&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles -->
     <style>
-        /* Basic mobile-first styling */
-        body { font-family: sans-serif; margin: 0; background-color: #f4f4f4; }
-        header { background-color: #333; color: white; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
-        header h1 { margin: 0; font-size: 1.5rem; }
-        nav a, nav button { color: white; text-decoration: none; background: #555; padding: 0.5rem 1rem; border-radius: 5px; border: none; cursor: pointer; }
-        main { padding: 1rem; }
-        .belt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem; }
-        .belt-button, .action-button { display: block; background-color: #007bff; color: white; text-align: center; padding: 1.5rem; text-decoration: none; border-radius: 8px; font-weight: bold; }
-        .controls { display: flex; flex-direction: column; gap: 1rem; margin: 2rem 0; }
-        .navigation { display: flex; justify-content: space-between; margin-top: 2rem; }
-        .flashcard { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 1.5rem; margin-top: 1rem; cursor: pointer; }
-        .flashcard .details { display: none; margin-top: 1rem; }
-        .flashcard.is-flipped .details { display: block; }
-        .flashcard.is-flipped .flip-instruction { display: none; }
-        video { max-width: 100%; border-radius: 8px; }
+        /* Define custom properties based on the design brief */
+        :root {
+            --bg-dark: #111827;
+            --border-color: #374151;
+            --text-main: #E5E7EB;
+            --text-heading: #F9FAFB;
+            --accent-gold: #B48A3A;
+            --font-sans: 'Inter', sans-serif;
+            --font-serif: 'Lora', serif;
+        }
+
+        /* Base body styling */
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            overflow-x: hidden; /* Prevent horizontal scroll from aurora */
+            position: relative;
+        }
+
+        /* Subtle noise/grain texture overlay */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><g fill-opacity="0.01" fill="%23fff"><circle cx="400" cy="400" r="600"/><circle cx="400" cy="400" r="500"/><circle cx="400" cy="400" r="400"/><circle cx="400" cy="400" r="300"/><circle cx="400" cy="400" r="200"/><circle cx="400" cy="400" r="100"/></g></svg>');
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        /* Subtle glowing "aurora" background effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at 10% 20%, rgba(180, 138, 58, 0.1), transparent 40%),
+                        radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.1), transparent 40%);
+            will-change: transform;
+            z-index: -2;
+            animation: aurora 25s linear infinite;
+        }
+
+        @keyframes aurora {
+            0% { transform: translateX(0%) translateY(0%) rotate(0deg); }
+            25% { transform: translateX(5%) translateY(10%) rotate(10deg); }
+            50% { transform: translateX(-5%) translateY(-10%) rotate(-10deg); }
+            75% { transform: translateX(5%) translateY(5%) rotate(5deg); }
+            100% { transform: translateX(0%) translateY(0%) rotate(0deg); }
+        }
+
+        /* Main Heading Typography */
+        h2 {
+            color: var(--text-heading);
+            font-family: var(--font-sans);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        /* Technique Name Typography */
+        .font-technique-name {
+            font-family: var(--font-serif);
+            color: var(--text-heading);
+        }
+
+        /* Sequential fade-in-up animation for lists */
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-list-item {
+            animation: fade-in-up 0.5s ease-out forwards;
+            opacity: 0; /* Start hidden */
+            animation-delay: calc(var(--delay-index) * 100ms);
+        }
+        
+        /* Custom border-color utility for hover states */
+        .hover-border-gold:hover {
+            border-color: var(--accent-gold);
+        }
+        .hover-text-gold:hover {
+            color: var(--accent-gold);
+        }
     </style>
 </head>
-<body>
-    <header>
-        <h1><a href="{% url 'core:home' %}" style="color:white;text-decoration:none;">Dojo Manual</a></h1>
-        <nav>
-            {% if user.is_authenticated %}
-                <form action="{% url 'account_logout' %}" method="post" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit">Logout</button>
-                </form>
-            {% else %}
-                <a href="{% url 'account_login' %}">Login</a>
-            {% endif %}
-        </nav>
-    </header>
-    <main>
-        {% block content %}{% endblock %}
-    </main>
+<body class="antialiased">
+
+    <div class="relative min-h-screen">
+        <!-- Header -->
+        <header class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="flex justify-between items-center">
+                <a href="{% url 'core:home' %}" class="text-xl font-bold tracking-tight transition-colors hover-text-gold" style="color: var(--text-heading);">
+                    Chuan Fa
+                </a>
+                <nav>
+                    {% if user.is_authenticated %}
+                        <!-- CORRECTED: This is now a simple link to the confirmation page, not a POST form. -->
+                        <a href="{% url 'account_logout' %}" class="flex items-center gap-2 text-sm transition-colors hover-text-gold" style="color: var(--text-main);">
+                            <span>Logout</span>
+                            <!-- CORRECTED Heroicon: ArrowLeftOnRectangle -->
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                              <path fill-rule="evenodd" d="M3 4.25A2.25 2.25 0 0 1 5.25 2h5.5A2.25 2.25 0 0 1 13 4.25v2a.75.75 0 0 1-1.5 0v-2a.75.75 0 0 0-.75-.75h-5.5a.75.75 0 0 0-.75.75v11.5c0 .414.336.75.75.75h5.5a.75.75 0 0 0 .75-.75v-2a.75.75 0 0 1 1.5 0v2A2.25 2.25 0 0 1 10.75 18h-5.5A2.25 2.25 0 0 1 3 15.75V4.25Z" clip-rule="evenodd" />
+                              <path fill-rule="evenodd" d="M16.72 9.47a.75.75 0 0 1 1.06 0l.72.72a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L8.94 11.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0l.72.72Z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    {% else %}
+                        <a href="{% url 'account_login' %}" class="text-sm transition-colors hover-text-gold" style="color: var(--text-main);">Login</a>
+                    {% endif %}
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+            {% block content %}{% endblock %}
+        </main>
+
+        <!-- Footer -->
+        <footer class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mt-16">
+            <p class="text-center text-xs" style="color: var(--border-color);">&copy; {% now "Y" %} Chuan Fa. All Rights Reserved.</p>
+        </footer>
+    </div>
 
     <!-- PWA Service Worker Registration -->
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register("{% url 'core:service-worker' %}")
-                    .then(reg => console.log('Service worker registered.', reg))
-                    .catch(err => console.log('Service worker registration failed:', err));
+                    .then(reg => console.log('Service Worker Registered.', reg))
+                    .catch(err => console.log('Service Worker registration failed:', err));
             });
         }
     </script>

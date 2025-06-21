@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="max-w-md mx-auto">
+    <div class="text-center mb-8">
+        <h2 class="text-3xl">{% trans "Sign Up" %}</h2>
+        <p class="mt-2" style="color: var(--text-main);">
+            Already have an account? Then please <a href="{{ login_url }}" class="font-bold hover-text-gold">sign in</a>.
+        </p>
+    </div>
+
+    <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+        
+        <div class="space-y-6">
+            {{ form.as_p }}
+        </div>
+
+        {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+        
+        <div class="mt-8">
+            <button type="submit" class="w-full p-3 font-semibold border rounded-lg transition-all duration-300 ease-in-out hover-border-gold hover:text-white" style="color: var(--text-main); border-color: var(--border-color);">
+                {% trans "Sign Up" %}
+            </button>
+        </div>
+    </form>
+</div>
+
+<style>
+    /* Custom styles for the allauth form fields */
+    #signup_form p {
+        margin-bottom: 1.5rem;
+    }
+    #signup_form label {
+        display: block;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        font-size: 0.875rem; /* text-sm */
+        color: var(--text-main);
+    }
+    #signup_form input {
+        display: block;
+        width: 100%;
+        padding: 0.75rem 0.75rem;
+        border-radius: 0.375rem; /* rounded-md */
+        border: 1px solid;
+        background-color: transparent;
+        color: var(--text-heading);
+        border-color: var(--border-color);
+        caret-color: var(--accent-gold);
+    }
+    #signup_form input:focus {
+        outline: 2px solid transparent;
+        outline-offset: 2px;
+        --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+        --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+        box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+        --tw-ring-color: var(--accent-gold);
+    }
+    #signup_form .helptext {
+        font-size: 0.75rem; /* text-xs */
+        color: var(--border-color);
+        margin-top: 0.5rem;
+        display: none; /* Hide default help text */
+    }
+</style>
+
+{% endblock %}

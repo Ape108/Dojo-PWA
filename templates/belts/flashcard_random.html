@@ -1,47 +1,71 @@
 {% extends "base.html" %}
-{% block content %}
-    <style>
-        .flashcard .details { display: none; }
-        .flashcard.is-flipped .details { display: block; }
-        .flashcard.is-flipped .flip-instruction { display: none; }
-    </style>
 
-    <h2>{{ belt.name }} - Random Flashcard</h2>
-    <div class="controls" style="flex-direction:row; justify-content:space-between;">
-        <a href="{% url 'belts:detail' belt.pk %}">Back to Belt</a>
-        <a href="{% url 'belts:flashcard_random' belt.pk %}">Next Card &raquo;</a>
+{% block content %}
+    <div class="mb-8">
+         <a href="{% url 'belts:detail' belt.pk %}" class="inline-flex items-center gap-2 text-sm transition-colors duration-300 ease-in-out hover-text-gold mb-4" style="color: var(--text-main);">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 0 1-.02 1.06L8.832 10l3.938 3.71a.75.75 0 1 1-1.04 1.08l-4.5-4.25a.75.75 0 0 1 0-1.08l4.5-4.25a.75.75 0 0 1 1.06.02Z" clip-rule="evenodd" /></svg>
+            <span>Back to {{ belt.name }} Belt</span>
+        </a>
+        <h2 class="text-3xl md:text-4xl">{{ belt.name }} &mdash; Flashcard</h2>
     </div>
 
     {% if technique %}
-    <div class="flashcard" id="flashcard">
-        <h3>{{ technique.name }}</h3>
-        <p class="flip-instruction"><em>(Tap to reveal details)</em></p>
-        <div class="details">
-            <h4>Description</h4>
-            <p>{{ technique.description|linebreaks }}</p>
+    <div id="flashcard" class="border rounded-lg p-6 md:p-8 cursor-pointer group" style="border-color: var(--border-color);">
+        <!-- Technique Title (Always Visible) -->
+        <h3 class="font-technique-name text-2xl mb-2">{{ technique.name }}</h3>
+
+        <!-- Flip Instruction (Visible before flip) -->
+        <p class="flip-instruction text-sm transition-opacity duration-300" style="color: var(--accent-gold);">Tap to reveal</p>
+
+        <!-- Details (Hidden by default) -->
+        <div class="details opacity-0 max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+            <div class="w-full h-px my-6" style="background-color: var(--border-color);"></div>
             
-            <!-- Video Section -->
-            <h4>Video</h4>
+            <h4 class="text-sm uppercase font-bold tracking-widest mb-2" style="color: var(--text-heading);">Description</h4>
+            <div class="prose prose-invert max-w-none text-gray-300 mb-6">
+                <p>{{ technique.description|linebreaks }}</p>
+            </div>
+
+            <h4 class="text-sm uppercase font-bold tracking-widest mb-2 mt-8" style="color: var(--text-heading);">Video</h4>
             {% if technique.video_file and technique.video_file.url %}
-                <video controls preload="none" style="width: 100%; border-radius: 8px; background-color: #000;"
-                       poster="[https://placehold.co/600x400/1a202c/ffffff?text=](https://placehold.co/600x400/1a202c/ffffff?text=)+"
-                       onerror="this.outerHTML = `<div style='background-color: #4A5568; color: white; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-family: sans-serif;'><p>Video Coming Soon</p></div>'`">
-                    <source src="{{ technique.video_file.url }}" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+                <div class="aspect-video bg-black rounded-lg overflow-hidden">
+                    <video controls preload="none" class="w-full h-full" poster="https://placehold.co/1280x720/111827/374151?text=+">
+                        <source src="{{ technique.video_file.url }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
             {% else %}
-                <div style="background-color: #4A5568; color: white; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-family: sans-serif;">
+                <div class="aspect-video rounded-lg flex items-center justify-center text-sm" style="background-color: var(--bg-dark); border: 1px dashed; border-color: var(--border-color); color: var(--border-color);">
                     <p>Video Coming Soon</p>
                 </div>
             {% endif %}
         </div>
     </div>
+
+    <!-- Controls -->
+    <div class="mt-8 flex justify-end">
+        <a href="{% url 'belts:flashcard_random' belt.pk %}" class="inline-flex items-center gap-2 text-sm font-semibold p-3 border rounded-lg transition-all duration-300 ease-in-out hover-border-gold hover:text-white" style="color: var(--text-main); border-color: var(--border-color);">
+            <span>Next Card</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 0 1 .02-1.06L11.168 10 7.23 6.29a.75.75 0 1 1 1.04-1.08l4.5 4.25a.75.75 0 0 1 0 1.08l-4.5 4.25a.75.75 0 0 1-1.06-.02Z" clip-rule="evenodd" /></svg>
+        </a>
+    </div>
+
     <script>
-        document.getElementById('flashcard').addEventListener('click', function() {
-            this.classList.toggle('is-flipped');
+        const flashcard = document.getElementById('flashcard');
+        const details = flashcard.querySelector('.details');
+        const instruction = flashcard.querySelector('.flip-instruction');
+        
+        flashcard.addEventListener('click', () => {
+            if (flashcard.classList.contains('is-flipped')) {
+                return; // Prevent re-flipping for now, could be changed
+            }
+            flashcard.classList.add('is-flipped');
+            instruction.style.opacity = '0';
+            details.style.opacity = '1';
+            details.style.maxHeight = details.scrollHeight + 'px'; // Expand to fit content
         });
     </script>
     {% else %}
-        <p>This belt has no techniques yet.</p>
+        <p class="text-center" style="color: var(--text-main);">This belt has no techniques yet.</p>
     {% endif %}
 {% endblock %}
