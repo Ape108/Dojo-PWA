@@ -7,6 +7,8 @@ An interactive Progressive Web App (PWA) for martial arts dojos, digitizing the 
 ## Features
 
 - **Progressive Web App:** Installable on desktop and mobile, with offline support.
+- **Dynamic "Belt Rack" Dashboard:** A visually engaging main menu for belt selection.
+- **Dynamic Color Theming:** The UI automatically adapts to the selected belt's color scheme.
 - **Belt-by-Belt Curriculum:** Organized by belt rank, from beginner to advanced.
 - **Interactive Flashcards:** Practice techniques in browse and randomized quiz modes.
 - **Embedded PDF Manuals:** View official belt manuals directly in the app.
@@ -20,7 +22,7 @@ An interactive Progressive Web App (PWA) for martial arts dojos, digitizing the 
 
 - **Backend:** Python 3.12, Django 5.2
 - **Database:** PostgreSQL (Cloud SQL in production, SQLite for local dev)
-- **Frontend:** HTML, CSS, Vanilla JavaScript (PWA features)
+- **Frontend:** HTML, Tailwind CSS (via CDN), Vanilla JavaScript (PWA features)
 - **Authentication:** Google Identity Platform (`django-allauth`)
 - **Media Storage:** Google Cloud Storage (PDFs, videos)
 - **Hosting:** Google Cloud Run (serverless containers)
