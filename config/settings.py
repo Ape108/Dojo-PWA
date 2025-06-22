@@ -53,8 +53,8 @@ INSTALLED_APPS = [
 # Use our custom User model for authentication
 AUTH_USER_MODEL = 'users.User'
 
-# Add the 'sites' framework ID
-SITE_ID = 1
+# A unique identifier for this installation, used by the sites framework
+SITE_ID = 2
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -133,6 +133,7 @@ SOCIALACCOUNT_PROVIDERS = {
 LOGIN_URL = '/'
 LOGIN_REDIRECT_URL = '/dashboard/'
 LOGOUT_REDIRECT_URL = '/'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_LOGIN_METHODS = ['username', 'email']
 ACCOUNT_UNIQUE_EMAIL = True
@@ -147,6 +148,7 @@ SOCIALACCOUNT_LOGIN_ON_GET = True
 
 # Custom adapter for social account username generation
 SOCIALACCOUNT_ADAPTER = 'users.adapters.CustomSocialAccountAdapter'
+SOCIALACCOUNT_SITE_BY_REQUEST = False
 
 # Internationalization
 

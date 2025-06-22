@@ -1,7 +1,7 @@
 // templates/service-worker.js
 
-// Increment the cache name to v4 to ensure the new service worker logic is applied.
-const CACHE_NAME = 'dojo-manual-cache-v4';
+// Increment the cache name to v5 to ensure the new service worker logic is applied.
+const CACHE_NAME = 'chuan-fa-cache-v5';
 
 // We still pre-cache the landing page for offline fallback.
 const URLS_TO_CACHE = [
