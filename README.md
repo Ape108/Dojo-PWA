@@ -2,6 +2,17 @@
 
 An interactive Progressive Web App (PWA) for martial arts dojos, digitizing the physical training manual. This app provides students with a modern, installable, and interactive experience for learning techniques, reviewing curriculum, and accessing official resources.
 
+![Sign In](https://media.licdn.com/dms/image/v2/D562DAQG3YbCTcWs0sQ/profile-treasury-image-shrink_800_800/B56ZfHF9YCGQAY-/0/1751391937854?e=1752872400&v=beta&t=o_TlJj9K2CyCvAL5WasAf63jxRoph6AtFeEQfnppG7Q)
+
+![Belt Selection](https://media.licdn.com/dms/image/v2/D562DAQFxh6r1g9GA-w/profile-treasury-image-shrink_800_800/B56ZfHGHHdH8Ac-/0/1751391982382?e=1752872400&v=beta&t=TtEyJQvEGyCZYE2fabt1PvQ6xFPgPz4YRpIZSI5xWoQ)
+
+![Embedded PDF Viewer](https://media.licdn.com/dms/image/v2/D562DAQEUk6B4hARxPA/profile-treasury-image-shrink_800_800/B56ZfHGPTpGoAc-/0/1751392034079?e=1752872400&v=beta&t=h8qJJiIdNyKgYfZ8lnIkg19Mq3k6NUBMBpcabTBd7rs)
+
+![Technique Browser](https://media.licdn.com/dms/image/v2/D562DAQE8QnOp6_MLcg/profile-treasury-image-shrink_800_800/B56ZfHGdCKGQAc-/0/1751392080342?e=1752872400&v=beta&t=HqObEMdq74L1Go8oM7qSuTs5LIMWyuZOPVFQJTXMIjQ)
+
+![Flashcard View](https://media.licdn.com/dms/image/v2/D562DAQGZ1eZT85OoaA/profile-treasury-image-shrink_800_800/B56ZfHGw8LGoBo-/0/1751392140743?e=1752872400&v=beta&t=aUEXFVBNeXd4UioIjSW11a8D2ywj0NyCQvEm4SkvfgM)
+
+
 ---
 
 ## Features
