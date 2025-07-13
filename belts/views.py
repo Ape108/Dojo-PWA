@@ -18,6 +18,7 @@ from django.views import View
 from django.views.generic import TemplateView
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Prefetch
 
 class ApprovedUserRequiredMixin(LoginRequiredMixin):
     """Custom mixin to verify a user is logged in AND approved by an admin."""
@@ -72,6 +73,16 @@ class FlashcardSequentialView(ApprovedUserRequiredMixin, ListView):
                     Q(tag_assignments__tag_id=tag_id) &
                     (Q(tag_assignments__user=self.request.user) | Q(tag_assignments__user__isnull=True))
                 )
+        # Prefetch tag assignments for current user and global
+        queryset = queryset.prefetch_related(
+            Prefetch(
+                'tag_assignments',
+                queryset=TechniqueTagAssignment.objects.filter(
+                    Q(user=self.request.user) | Q(user__isnull=True)
+                ).select_related('tag'),
+                to_attr='filtered_tag_assignments'
+            )
+        )
         return queryset.distinct()
 
     def get_context_data(self, **kwargs):
@@ -128,7 +139,12 @@ class TagCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user
-        form.instance.is_global = False
+        # Only allow global tag creation if ?global=1 and user is teacher/admin
+        make_global = self.request.GET.get('global') == '1'
+        if make_global and hasattr(self.request.user, 'user_type') and (self.request.user.user_type == 'teacher' or self.request.user.user_type == 'admin' or self.request.user.is_superuser):
+            form.instance.is_global = True
+        else:
+            form.instance.is_global = False
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -185,6 +201,7 @@ class TechniqueTagAssignAjaxView(LoginRequiredMixin, View):
         TechniqueTagAssignment.objects.filter(technique=technique).filter(Q(user=request.user) | Q(user__isnull=True)).delete()
         # Re-add assignments
         for tag in tags_to_assign:
+            # Always assign global tags as global (user=None)
             TechniqueTagAssignment.objects.create(
                 technique=technique,
                 tag=tag,

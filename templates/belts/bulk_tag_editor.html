@@ -13,6 +13,11 @@
         <a href="{% url 'belts:tag_add' belt.pk %}" class="px-4 py-2 rounded bg-blue-600 text-white font-semibold hover:bg-blue-700 transition">
             + Add Tag
         </a>
+        {% if request.user.user_type == 'teacher' or request.user.user_type == 'admin' or request.user.is_superuser %}
+            <a href="{% url 'belts:tag_add' belt.pk %}?global=1" class="ml-2 px-4 py-2 rounded bg-yellow-600 text-white font-semibold hover:bg-yellow-700 transition">
+                + Add Global Tag
+            </a>
+        {% endif %}
     </div>
     <form id="bulk-tag-form" method="post">
         {% csrf_token %}
