@@ -7,7 +7,10 @@ cryptography==45.0.4
 dj-database-url==3.0.0
 Django==5.2.3
 django-allauth==65.9.0
+django-ckeditor==6.7.3
+django-js-asset==3.1.2
 django-storages==1.14.6
+django-widgets-improved==1.5.0
 google-api-core==2.25.1
 google-auth==2.40.3
 google-cloud-core==2.4.3
@@ -22,6 +25,7 @@ grpcio-status==1.73.0
 gunicorn==23.0.0
 idna==3.10
 packaging==25.0
+pillow==11.2.1
 proto-plus==1.26.1
 protobuf==6.31.1
 psycopg2-binary==2.9.10
@@ -36,5 +40,3 @@ sqlparse==0.5.3
 typing_extensions==4.14.0
 urllib3==2.5.0
 whitenoise==6.9.0
-
-django-ckeditor

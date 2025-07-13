@@ -6,8 +6,8 @@ import dj_database_url
 # --- Production Security ---
 DEBUG = False
 # For better security, you should replace '*' with your actual domain name.
-ALLOWED_HOSTS = ['dojo-pwa-service-849037756424.us-central1.run.app']
-CSRF_TRUSTED_ORIGINS = ['https://dojo-pwa-service-849037756424.us-central1.run.app']
+ALLOWED_HOSTS = ['dojo-pwa-849037756424.us-central1.run.app']
+CSRF_TRUSTED_ORIGINS = ['https://dojo-pwa-849037756424.us-central1.run.app']
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 # --- HTTPS Settings for Proxy ---
