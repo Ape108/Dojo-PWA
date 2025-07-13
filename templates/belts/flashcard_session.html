@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="content-panel" style="max-width: 600px; margin: 2rem auto;">
+    <h2 class="text-2xl font-bold mb-6" style="color: var(--belt-accent-color);">Flashcard Session for {{ belt.name }} Belt</h2>
+    <div id="flashcard-session-root"></div>
+    {{ techniques|json_script:"techniques-data" }}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+const techniques = JSON.parse(document.getElementById('techniques-data').textContent);
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Flashcard session state
+    let current = 0;
+    let correct = 0;
+    let wrong = 0;
+    let results = [];
+    let deck = techniques.map((t, i) => ({...t, idx: i}));
+
+    function renderCard() {
+        const root = document.getElementById('flashcard-session-root');
+        if (current >= deck.length) {
+            renderResults();
+            return;
+        }
+        const t = deck[current];
+        root.innerHTML = `
+            <div id="flashcard" class="border rounded-lg p-6 bg-gray-900 cursor-pointer transition-all duration-300" style="min-height: 260px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                <h3 class="text-xl font-semibold mb-4">${t.name}</h3>
+                <div id="flashcard-instruction" class="mb-4 text-center text-yellow-400 text-base font-semibold" style="display:block;">Tap to reveal</div>
+                <div id="flashcard-details" class="prose prose-invert max-w-none text-gray-300 mb-6" style="opacity:0; max-height:0; overflow:hidden; transition:opacity 0.3s, max-height 0.3s;">
+                    ${t.description.replace(/\n/g, '<br>')}
+                </div>
+                <div id="flashcard-actions" class="flex gap-4 justify-center mt-6" style="display:none;">
+                    <button id="btn-correct" class="px-6 py-3 rounded bg-green-600 text-white text-2xl font-bold flex items-center gap-2 hover:bg-green-700 transition">
+                        ✔️
+                    </button>
+                    <button id="btn-wrong" class="px-6 py-3 rounded bg-red-600 text-white text-2xl font-bold flex items-center gap-2 hover:bg-red-700 transition">
+                        <span style='color:white;'>❌</span>
+                    </button>
+                </div>
+                <div class="mt-8 text-center text-sm text-gray-400">
+                    Card ${current+1} of ${deck.length}
+                </div>
+                <div class="mt-2 text-center">
+                    <span id="tally-correct" class="text-green-400 font-bold">${correct}</span> correct,
+                    <span id="tally-wrong" class="text-red-400 font-bold">${wrong}</span> wrong
+                    (<span id="tally-pct">${deck.length ? Math.round(100*correct/(correct+wrong||1)) : 0}</span>%)
+                </div>
+            </div>
+            <div id="video-card" style="display:none;">
+                ${t.video_enabled ? (
+                    t.video_file_url ? `
+                        <div class='border rounded-lg p-4 mt-6 bg-black aspect-video flex items-center justify-center'>
+                            <video controls preload='none' class='w-full h-full rounded-lg' poster='https://placehold.co/1280x720/111827/374151?text=Loading+Video...'>
+                                <source src='${t.video_file_url}' type='video/mp4'>
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    ` : `
+                        <div class='border rounded-lg p-4 mt-6 aspect-video flex items-center justify-center text-sm' style='background-color: var(--bg-dark); border: 1px dashed var(--border-color); color: var(--border-color);'>
+                            <p>Video Coming Soon</p>
+                        </div>
+                    `
+                ) : ''}
+            </div>
+        `;
+        const card = document.getElementById('flashcard');
+        const details = document.getElementById('flashcard-details');
+        const actions = document.getElementById('flashcard-actions');
+        const instruction = document.getElementById('flashcard-instruction');
+        let revealed = false;
+        card.onclick = function() {
+            if (!revealed) {
+                details.style.opacity = 1;
+                details.style.maxHeight = '200px';
+                actions.style.display = 'flex';
+                instruction.style.display = 'none';
+                revealed = true;
+                // Show video card if needed
+                const videoCard = document.getElementById('video-card');
+                if (videoCard) videoCard.style.display = '';
+            }
+        };
+        document.getElementById('btn-correct').onclick = (e) => {
+            e.stopPropagation();
+            correct++;
+            results.push({idx: t.idx, correct: true});
+            current++;
+            renderCard();
+        };
+        document.getElementById('btn-wrong').onclick = (e) => {
+            e.stopPropagation();
+            wrong++;
+            results.push({idx: t.idx, correct: false});
+            current++;
+            renderCard();
+        };
+    }
+
+    function renderResults() {
+        const root = document.getElementById('flashcard-session-root');
+        const pct = Math.round(100*correct/(correct+wrong||1));
+        root.innerHTML = `
+            <div class="border rounded-lg p-6 bg-gray-900 text-center">
+                <h3 class="text-2xl font-bold mb-4">Session Complete!</h3>
+                <div class="mb-4">
+                    <span class="text-green-400 font-bold">${correct}</span> correct,
+                    <span class="text-red-400 font-bold">${wrong}</span> wrong
+                    (<span class="font-bold">${pct}%</span> correct)
+                </div>
+                <div class="flex flex-col gap-2 items-center">
+                    <button id="btn-restart" class="px-4 py-2 rounded bg-blue-600 text-white font-semibold hover:bg-blue-700 transition">Restart with Same Set</button>
+                    <button id="btn-practice-wrong" class="px-4 py-2 rounded bg-yellow-600 text-black font-semibold hover:bg-yellow-700 transition">Practice Only Wrong Cards</button>
+                    <a href="{% url 'belts:flashcard_list' belt.pk %}" class="px-4 py-2 rounded bg-gray-600 text-white font-semibold hover:bg-gray-700 transition mt-2">Back to Technique Browser</a>
+                </div>
+            </div>
+        `;
+        document.getElementById('btn-restart').onclick = () => {
+            // Restart with same set
+            current = 0;
+            correct = 0;
+            wrong = 0;
+            results = [];
+            deck = techniques.map((t, i) => ({...t, idx: i}));
+            shuffle(deck);
+            renderCard();
+        };
+        document.getElementById('btn-practice-wrong').onclick = () => {
+            // Only wrong cards
+            const wrongIdxs = results.filter(r => !r.correct).map(r => r.idx);
+            deck = techniques.filter((t, i) => wrongIdxs.includes(i)).map((t, i) => ({...t, idx: i}));
+            shuffle(deck);
+            current = 0;
+            correct = 0;
+            wrong = 0;
+            results = [];
+            renderCard();
+        };
+    }
+
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    if (deck.length === 0) {
+        document.getElementById('flashcard-session-root').innerHTML = `<div class="text-center text-gray-400">No techniques to practice.</div>`;
+    } else {
+        shuffle(deck);
+        renderCard();
+    }
+});
+</script>
+{% endblock %} 

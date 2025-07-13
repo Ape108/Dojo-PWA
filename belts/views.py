@@ -124,6 +124,37 @@ class FlashcardRandomView(ApprovedUserRequiredMixin, DetailView):
             context['belt'] = get_object_or_404(Belt, pk=self.kwargs['pk'])
         return context
 
+class FlashcardSessionView(ApprovedUserRequiredMixin, TemplateView):
+    template_name = 'belts/flashcard_session.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        belt = get_object_or_404(Belt, pk=self.kwargs['pk'])
+        tag_ids = self.request.GET.getlist('tag')
+        queryset = Technique.objects.filter(belt=belt)
+        if tag_ids:
+            for tag_id in tag_ids:
+                queryset = queryset.filter(
+                    Q(tag_assignments__tag_id=tag_id) &
+                    (Q(tag_assignments__user=self.request.user) | Q(tag_assignments__user__isnull=True))
+                )
+        techniques = list(queryset.distinct())
+        import random
+        random.shuffle(techniques)
+        context['belt'] = belt
+        # Serialize techniques for JS
+        context['techniques'] = [
+            {
+                'id': t.id,
+                'name': t.name,
+                'description': t.description,
+                'order_in_belt': t.order_in_belt,
+                'video_enabled': t.video_enabled,
+                'video_file_url': t.video_file.url if t.video_file else None,
+            } for t in techniques
+        ]
+        return context
+
 class TagForm(forms.ModelForm):
     class Meta:
         model = Tag

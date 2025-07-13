@@ -117,6 +117,10 @@
             <div class="flex flex-row justify-end gap-2 mt-2">
                 <a href="{% url 'belts:flashcard_list' belt.pk %}" class="px-4 py-2 rounded bg-gray-600 text-white font-semibold hover:bg-gray-700 transition text-center">Clear Filters</a>
                 <button type="submit" class="px-4 py-2 rounded bg-blue-600 text-white font-semibold hover:bg-blue-700 transition">Filter</button>
+                <button id="generate-flashcards-btn" type="button" class="px-4 py-2 rounded bg-green-600 text-white font-semibold hover:bg-green-700 transition flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                    Generate Flashcards
+                </button>
             </div>
         </div>
     </form>
@@ -131,13 +135,11 @@
             <!-- Tag display -->
             <div class="mt-2 flex flex-wrap gap-2 items-center">
                 <span id="technique-tags-{{ technique.id }}">
-                {% for tag_assignment in technique.tag_assignments.all %}
-                    {% if tag_assignment.user == request.user or tag_assignment.user is None %}
-                        <span class="px-2 py-1 rounded text-xs font-semibold" style="background: {% if tag_assignment.tag.is_global %}var(--belt-accent-color){% else %}#374151{% endif %}; color: #fff;">
-                            {{ tag_assignment.tag.name }}
-                            {% if not tag_assignment.tag.is_global %}<span class="text-gray-300">(me)</span>{% endif %}
-                        </span>
-                    {% endif %}
+                {% for tag_assignment in technique.filtered_tag_assignments %}
+                    <span class="px-2 py-1 rounded text-xs font-semibold" style="background: {% if tag_assignment.tag.is_global %}var(--belt-accent-color){% else %}#374151{% endif %}; color: #fff;">
+                        {{ tag_assignment.tag.name }}
+                        {% if not tag_assignment.tag.is_global %}<span class="text-gray-300">(me)</span>{% endif %}
+                    </span>
                 {% empty %}
                     <span class="text-xs text-gray-500">No tags</span>
                 {% endfor %}
@@ -253,6 +255,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 modal.classList.add('hidden');
             });
         });
+    });
+
+    // Generate Flashcards button logic
+    document.getElementById('generate-flashcards-btn').addEventListener('click', function() {
+        // Gather selected tag filters from the form
+        const form = document.querySelector('form[method="get"]');
+        const params = new URLSearchParams(new FormData(form));
+        window.location.href = `{% url 'belts:flashcard_session' belt.pk %}?${params.toString()}`;
     });
 });
 </script>
