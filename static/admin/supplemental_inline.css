@@ -1,0 +1,17 @@
+/* Make the inline wider */
+.inline-group {
+    max-width: 1200px;
+    width: 100%;
+}
+
+/* Make CKEditor field take more space */
+.inline-group .cke {
+    width: 700px !important;
+    min-width: 700px !important;
+}
+
+/* Optional: Make the content cell larger */
+.inline-group td.field-content {
+    min-width: 720px;
+    max-width: 900px;
+} 

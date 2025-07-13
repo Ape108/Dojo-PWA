@@ -110,4 +110,44 @@
         </div>
     </div>
 </div>
+
+{% if supplemental_materials %}
+<div class="content-panel mt-8">
+    <h2 class="text-2xl font-bold mb-4" style="color: var(--belt-accent-color);">Supplemental Materials</h2>
+    <ul class="space-y-6">
+        {% for material in supplemental_materials %}
+        <li class="border border-gray-700 rounded-lg p-4 bg-gray-900">
+            <div class="flex items-center gap-4 mb-2">
+                {% if material.thumbnail %}
+                    <img src="{{ material.thumbnail.url }}" alt="Thumbnail" class="w-16 h-16 object-cover rounded shadow"/>
+                {% endif %}
+                <div>
+                    <h3 class="text-xl font-semibold" style="color: var(--belt-accent-color);">{{ material.title }}</h3>
+                    {% if material.description %}
+                        <p class="text-sm text-gray-400">{{ material.description }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="mt-2">
+                {% if material.material_type == 'pdf' and material.file %}
+                    <a href="{{ material.file.url }}" target="_blank" class="text-blue-400 underline">View PDF</a>
+                {% elif material.material_type == 'video' and material.file %}
+                    <video controls class="w-full max-w-md mt-2">
+                        <source src="{{ material.file.url }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                {% elif material.material_type == 'article' and material.content %}
+                    <div class="prose prose-invert max-w-none mt-2">{{ material.content|safe }}</div>
+                {% elif material.material_type == 'link' and material.external_url %}
+                    <a href="{{ material.external_url }}" target="_blank" class="text-blue-400 underline">{{ material.external_url }}</a>
+                {% else %}
+                    <span class="text-gray-500">No content available.</span>
+                {% endif %}
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
 {% endblock %}

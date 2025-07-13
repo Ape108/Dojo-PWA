@@ -23,7 +23,7 @@ class BeltDetailView(ApprovedUserRequiredMixin, DetailView):
     context_object_name = 'belt'
 
     def get_context_data(self, **kwargs):
-        """Add next/previous belt links to the context for easy navigation."""
+        """Add next/previous belt links and supplemental materials to the context for easy navigation."""
         context = super().get_context_data(**kwargs)
         all_belts = list(Belt.objects.all())
         try:
@@ -33,6 +33,8 @@ class BeltDetailView(ApprovedUserRequiredMixin, DetailView):
         except ValueError:
             context['prev_belt'] = None
             context['next_belt'] = None
+        # Add supplemental materials for this belt
+        context['supplemental_materials'] = self.object.supplemental_materials.all()
         return context
 
 class BeltManualView(ApprovedUserRequiredMixin, DetailView):

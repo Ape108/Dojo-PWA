@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'core',
     'users',
     'belts',
+    'ckeditor',
 ]
 
 # Use our custom User model for authentication
@@ -204,5 +205,22 @@ LOGGING = {
             "level": "DEBUG",
             "propagate": False,
         },
+    },
+}
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': '700px',
+        'extraPlugins': 'maximize',
+        'removePlugins': 'resize',
+    },
+    'supplemental_inline': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': '700px',
+        'extraPlugins': 'maximize',
+        'removePlugins': 'resize',
     },
 }
