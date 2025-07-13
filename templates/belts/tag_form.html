@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+input[type="text"], input[type="text"].form-input {
+    background: #222;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 0.375rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 1.1rem;
+    width: 100%;
+    margin-top: 0.25rem;
+}
+input[type="text"]:focus {
+    outline: 2px solid var(--belt-accent-color, #B48A3A);
+    border-color: var(--belt-accent-color, #B48A3A);
+}
+</style>
+
+<div class="content-panel" style="max-width: 500px; margin: 2rem auto;">
+    <h2 class="text-xl font-bold mb-4" style="color: var(--belt-accent-color);">
+        {% if form.instance.pk %}Edit Tag{% else %}Add Tag{% endif %}
+    </h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="mb-4">
+            {{ form.name.label_tag }}<br>
+            {{ form.name }}
+            {{ form.name.errors }}
+        </div>
+        <div class="flex gap-4">
+            <button type="submit" class="px-4 py-2 rounded bg-blue-600 text-white font-semibold hover:bg-blue-700 transition">
+                Save
+            </button>
+            <a href="{% url 'belts:flashcard_list' pk=pk %}" class="px-4 py-2 rounded bg-gray-600 text-white font-semibold hover:bg-gray-700 transition">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %} 

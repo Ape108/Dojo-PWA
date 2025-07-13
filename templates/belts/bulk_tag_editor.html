@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="content-panel" style="max-width: 700px; margin: 2rem auto;">
+    <h2 class="text-2xl font-bold mb-6" style="color: var(--belt-accent-color);">Bulk Tag Editor for {{ belt.name }} Belt</h2>
+    <div class="mb-6">
+        <a href="{% url 'belts:flashcard_list' pk=belt.pk %}" class="inline-flex items-center gap-2 text-sm transition-colors duration-300 ease-in-out hover-text-gold mb-4" style="color: var(--text-main);">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 0 1-.02 1.06L8.832 10l3.938 3.71a.75.75 0 1 1-1.04 1.08l-4.5-4.25a.75.75 0 0 1 0-1.08l4.5-4.25a.75.75 0 0 1 1.06.02Z" clip-rule="evenodd" /></svg>
+            <span>Back to Technique Browser</span>
+        </a>
+    </div>
+    <div class="flex justify-end mb-4">
+        <a href="{% url 'belts:tag_add' belt.pk %}" class="px-4 py-2 rounded bg-blue-600 text-white font-semibold hover:bg-blue-700 transition">
+            + Add Tag
+        </a>
+    </div>
+    <form id="bulk-tag-form" method="post">
+        {% csrf_token %}
+        <div class="mb-6">
+            <label class="block font-semibold mb-2" style="color: var(--belt-accent-color);">Select Tag</label>
+            <select id="tag-select" name="tag_id" class="form-select px-3 py-2 rounded w-full bg-gray-800 text-white">
+                <option value="">-- Choose a tag --</option>
+                {% for tag in global_tags %}
+                    <option value="{{ tag.id }}">{{ tag.name }} (Global)</option>
+                {% endfor %}
+                {% for tag in user_tags %}
+                    <option value="{{ tag.id }}">{{ tag.name }} (Me)</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-6">
+            <label class="block font-semibold mb-2" style="color: var(--belt-accent-color);">Techniques</label>
+            <div class="flex flex-col gap-2" id="technique-checkbox-list">
+                {% for technique in techniques %}
+                    <label class="flex items-center gap-2">
+                        <input type="checkbox" name="technique_ids" value="{{ technique.id }}" class="form-checkbox" data-technique-id="{{ technique.id }}">
+                        <span>{{ technique.name }}</span>
+                    </label>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="flex gap-4">
+            <button type="submit" class="px-4 py-2 rounded bg-blue-600 text-white font-semibold hover:bg-blue-700 transition">Save</button>
+            <a href="{% url 'belts:flashcard_list' pk=belt.pk %}" class="px-4 py-2 rounded bg-gray-600 text-white font-semibold hover:bg-gray-700 transition">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Tag assignments for each technique, for pre-checking
+    const tagAssignments = {
+        {% for technique in techniques %}
+            {{ technique.id }}: [{% for ta in technique.tag_assignments.all %}{{ ta.tag.id }}{% if not forloop.last %},{% endif %}{% endfor %}]{% if not forloop.last %},{% endif %}
+        {% endfor %}
+    };
+    const tagSelect = document.getElementById('tag-select');
+    const checkboxes = document.querySelectorAll('input[name="technique_ids"]');
+    function updateCheckboxes() {
+        const selectedTag = tagSelect.value;
+        checkboxes.forEach(cb => {
+            const techId = cb.getAttribute('data-technique-id');
+            if (tagAssignments[techId] && tagAssignments[techId].includes(Number(selectedTag))) {
+                cb.checked = true;
+            } else {
+                cb.checked = false;
+            }
+        });
+    }
+    tagSelect.addEventListener('change', updateCheckboxes);
+    // Pre-check on page load if a tag is selected
+    updateCheckboxes();
+    document.getElementById('bulk-tag-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var tagId = document.getElementById('tag-select').value;
+        var checked = Array.from(document.querySelectorAll('input[name="technique_ids"]:checked')).map(cb => cb.value);
+        var csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        if (!tagId) {
+            alert('Please select a tag.');
+            return;
+        }
+        let params = new URLSearchParams();
+        params.append('tag_id', tagId);
+        params.append('belt_id', '{{ belt.id }}');
+        checked.forEach(id => params.append('technique_ids[]', id));
+        fetch("{% url 'belts:ajax_bulk_tag_toggle' %}", {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': csrfToken,
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+            body: params
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.location.href = "{% url 'belts:flashcard_list' pk=belt.pk %}";
+            }
+        });
+    });
+});
+</script>
+{% endblock %} 

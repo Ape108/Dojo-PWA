@@ -4,7 +4,20 @@ import random
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import DetailView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Belt, Technique
+from django.db.models import Q
+from .models import Belt, Technique, Tag, TechniqueTagAssignment
+from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Tag
+from django import forms
+from django.views.generic import CreateView, UpdateView, DeleteView
+from django.http import JsonResponse, HttpResponseBadRequest
+from django.views.decorators.http import require_POST
+from django.utils.decorators import method_decorator
+from django.views import View
+from django.views.generic import TemplateView
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 
 class ApprovedUserRequiredMixin(LoginRequiredMixin):
     """Custom mixin to verify a user is logged in AND approved by an admin."""
@@ -49,13 +62,27 @@ class FlashcardSequentialView(ApprovedUserRequiredMixin, ListView):
     context_object_name = 'techniques'
 
     def get_queryset(self):
-        # FIX: Changed self.kwargs['belt_pk'] to self.kwargs['pk']
         self.belt = get_object_or_404(Belt, pk=self.kwargs['pk'])
-        return Technique.objects.filter(belt=self.belt)
+        queryset = Technique.objects.filter(belt=self.belt)
+        tag_ids = self.request.GET.getlist('tag')
+        if tag_ids:
+            # Filter techniques that have ALL selected tags (global or user-specific)
+            for tag_id in tag_ids:
+                queryset = queryset.filter(
+                    Q(tag_assignments__tag_id=tag_id) &
+                    (Q(tag_assignments__user=self.request.user) | Q(tag_assignments__user__isnull=True))
+                )
+        return queryset.distinct()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['belt'] = self.belt
+        # Provide global tags (teacher-published)
+        context['global_tags'] = Tag.objects.filter(is_global=True)
+        # Provide user tags (student-created)
+        context['user_tags'] = Tag.objects.filter(is_global=False, created_by=self.request.user)
+        # Pass selected tag IDs for UI state
+        context['selected_tag_ids'] = [int(t) for t in self.request.GET.getlist('tag') if t.isdigit()]
         return context
 
 class FlashcardRandomView(ApprovedUserRequiredMixin, DetailView):
@@ -85,3 +112,143 @@ class FlashcardRandomView(ApprovedUserRequiredMixin, DetailView):
             # Fallback for when there are no techniques for a belt.
             context['belt'] = get_object_or_404(Belt, pk=self.kwargs['pk'])
         return context
+
+class TagForm(forms.ModelForm):
+    class Meta:
+        model = Tag
+        fields = ['name']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Tag name'}),
+        }
+
+class TagCreateView(LoginRequiredMixin, CreateView):
+    model = Tag
+    form_class = TagForm
+    template_name = 'belts/tag_form.html'
+
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        form.instance.is_global = False
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('belts:flashcard_list', kwargs={'pk': self.kwargs['pk']})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['pk'] = self.kwargs['pk']
+        return context
+
+class TagUpdateView(LoginRequiredMixin, UpdateView):
+    model = Tag
+    form_class = TagForm
+    template_name = 'belts/tag_form.html'
+
+    def get_queryset(self):
+        return Tag.objects.filter(created_by=self.request.user, is_global=False)
+
+    def get_success_url(self):
+        return reverse_lazy('belts:flashcard_list', kwargs={'pk': self.kwargs['pk']})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['pk'] = self.kwargs['pk']
+        return context
+
+class TagDeleteView(LoginRequiredMixin, DeleteView):
+    model = Tag
+    template_name = 'belts/tag_confirm_delete.html'
+
+    def get_queryset(self):
+        return Tag.objects.filter(created_by=self.request.user, is_global=False)
+
+    def get_success_url(self):
+        return reverse_lazy('belts:flashcard_list', kwargs={'pk': self.kwargs['pk']})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['pk'] = self.kwargs['pk']
+        return context
+
+class TechniqueTagAssignAjaxView(LoginRequiredMixin, View):
+    def post(self, request, *args, **kwargs):
+        technique_id = request.POST.get('technique_id')
+        tag_ids = request.POST.getlist('tag_ids[]')
+        try:
+            technique = Technique.objects.get(id=technique_id)
+        except Technique.DoesNotExist:
+            return HttpResponseBadRequest('Technique not found')
+        # Only allow assigning global tags or tags owned by the user
+        allowed_tags = Tag.objects.filter(Q(is_global=True) | Q(created_by=request.user))
+        tags_to_assign = allowed_tags.filter(id__in=tag_ids)
+        # Remove all tag assignments for this user (or global) for this technique
+        TechniqueTagAssignment.objects.filter(technique=technique).filter(Q(user=request.user) | Q(user__isnull=True)).delete()
+        # Re-add assignments
+        for tag in tags_to_assign:
+            TechniqueTagAssignment.objects.create(
+                technique=technique,
+                tag=tag,
+                user=None if tag.is_global else request.user
+            )
+        # Return updated tag list for this technique
+        updated_assignments = technique.tag_assignments.filter(Q(user=request.user) | Q(user__isnull=True)).select_related('tag')
+        tag_data = [
+            {
+                'name': ta.tag.name,
+                'is_global': ta.tag.is_global,
+                'id': ta.tag.id,
+            } for ta in updated_assignments
+        ]
+        return JsonResponse({'tags': tag_data})
+
+class BulkTagEditorView(LoginRequiredMixin, TemplateView):
+    template_name = 'belts/bulk_tag_editor.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        belt = get_object_or_404(Belt, pk=self.kwargs['pk'])
+        context['belt'] = belt
+        context['techniques'] = Technique.objects.filter(belt=belt)
+        context['global_tags'] = Tag.objects.filter(is_global=True)
+        context['user_tags'] = Tag.objects.filter(created_by=self.request.user, is_global=False)
+        return context
+
+@method_decorator(csrf_exempt, name='dispatch')
+class BulkTagToggleAjaxView(LoginRequiredMixin, View):
+    def post(self, request, *args, **kwargs):
+        tag_id = request.POST.get('tag_id')
+        checked_technique_ids = set(request.POST.getlist('technique_ids[]'))
+        try:
+            tag = Tag.objects.get(id=tag_id)
+        except Tag.DoesNotExist:
+            return HttpResponseBadRequest('Tag not found')
+        # Only allow toggling tags the user owns or global tags
+        if not (tag.is_global or tag.created_by == request.user):
+            return HttpResponseBadRequest('Not allowed')
+        # Get all techniques for this belt
+        belt_id = request.POST.get('belt_id')
+        if belt_id:
+            all_techniques = Technique.objects.filter(belt_id=belt_id)
+        else:
+            all_techniques = Technique.objects.all()
+        for technique in all_techniques:
+            has_tag = TechniqueTagAssignment.objects.filter(
+                technique=technique,
+                tag=tag,
+                user=None if tag.is_global else request.user
+            ).exists()
+            if str(technique.id) in checked_technique_ids:
+                if not has_tag:
+                    TechniqueTagAssignment.objects.create(
+                        technique=technique,
+                        tag=tag,
+                        user=None if tag.is_global else request.user
+                    )
+            else:
+                if has_tag:
+                    TechniqueTagAssignment.objects.filter(
+                        technique=technique,
+                        tag=tag,
+                        user=None if tag.is_global else request.user
+                    ).delete()
+        return JsonResponse({'success': True})

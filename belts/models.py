@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 from ckeditor.fields import RichTextField
 
@@ -71,3 +72,32 @@ class SupplementalMaterial(models.Model):
 
     def __str__(self):
         return f"{self.title} ({self.get_material_type_display()})"
+
+class Tag(models.Model):
+    name = models.CharField(max_length=64)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL, related_name='created_tags')
+    is_global = models.BooleanField(default=False, help_text='True if published by teacher, False if student/private')
+    promotion_requested = models.BooleanField(default=False, help_text='Student requested promotion to global')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = ('name', 'created_by', 'is_global')
+        ordering = ['is_global', 'name']
+
+    def __str__(self):
+        return self.name
+
+class TechniqueTagAssignment(models.Model):
+    technique = models.ForeignKey('Technique', on_delete=models.CASCADE, related_name='tag_assignments')
+    tag = models.ForeignKey(Tag, on_delete=models.CASCADE, related_name='technique_assignments')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.CASCADE, help_text='Null for global assignment, set for student-specific')
+    assigned_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('technique', 'tag', 'user')
+
+    def __str__(self):
+        return f"{self.technique} - {self.tag} ({'global' if self.user is None else self.user.username})"
+
+setattr(Technique, 'tags', models.ManyToManyField('Tag', through='TechniqueTagAssignment', related_name='techniques'))

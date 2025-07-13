@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div style="max-width: 800px; margin: 2rem auto 0 auto;">
+    <a href="{% url 'belts:detail' belt.pk %}" class="inline-flex items-center gap-2 text-sm transition-colors duration-300 ease-in-out hover-text-gold mb-4" style="color: var(--text-main);">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 0 1-.02 1.06L8.832 10l3.938 3.71a.75.75 0 1 1-1.04 1.08l-4.5-4.25a.75.75 0 0 1 0-1.08l4.5-4.25a.75.75 0 0 1 1.06.02Z" clip-rule="evenodd" /></svg>
+        <span>Back to {{ belt.name }} Belt</span>
+    </a>
+</div>
+
 <style>
     /* Inherit the accent color from the parent belt */
     :root {
@@ -68,19 +75,108 @@
 
 <div class="content-panel">
     <div class="page-header">
-        <a href="{% url 'belts:detail' belt.pk %}" class="belt-title-link">
-            {{ belt.name }}
-        </a>
+        <span class="belt-title-link">{{ belt.name }}</span>
         <p class="page-subtitle">Technique List</p>
     </div>
 
+    <form method="get" class="mb-8">
+        <div class="flex flex-col gap-2">
+            <div class="flex flex-row items-end justify-between gap-4">
+                <div class="flex flex-row gap-8 flex-grow">
+                    <div>
+                        <label class="block font-semibold mb-1" style="color: var(--belt-accent-color);">Global Tags</label>
+                        <div class="flex flex-wrap gap-2">
+                            {% for tag in global_tags %}
+                                <label class="inline-flex items-center gap-1">
+                                    <input type="checkbox" name="tag" value="{{ tag.id }}" {% if tag.id in selected_tag_ids %}checked{% endif %}>
+                                    <span class="px-2 py-1 rounded bg-gray-800 text-xs" style="color: var(--belt-accent-color);">{{ tag.name }}</span>
+                                </label>
+                            {% empty %}
+                                <span class="text-xs text-gray-500">No global tags</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block font-semibold mb-1" style="color: var(--belt-accent-color);">My Tags</label>
+                        <div class="flex flex-wrap gap-2">
+                            {% for tag in user_tags %}
+                                <label class="inline-flex items-center gap-1">
+                                    <input type="checkbox" name="tag" value="{{ tag.id }}" {% if tag.id in selected_tag_ids %}checked{% endif %}>
+                                    <span class="px-2 py-1 rounded bg-gray-700 text-xs">{{ tag.name }}</span>
+                                </label>
+                            {% empty %}
+                                <span class="text-xs text-gray-500">No personal tags</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <a href="{% url 'belts:bulk_tag_editor' belt.pk %}" class="px-4 py-2 rounded bg-green-600 text-white font-semibold hover:bg-green-700 transition flex-shrink-0 max-w-fit text-center">
+                    Bulk Tag Editor
+                </a>
+            </div>
+            <div class="flex flex-row justify-end gap-2 mt-2">
+                <a href="{% url 'belts:flashcard_list' belt.pk %}" class="px-4 py-2 rounded bg-gray-600 text-white font-semibold hover:bg-gray-700 transition text-center">Clear Filters</a>
+                <button type="submit" class="px-4 py-2 rounded bg-blue-600 text-white font-semibold hover:bg-blue-700 transition">Filter</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Technique List -->
     {% for technique in techniques %}
-        <div class="technique-card">
+        <div class="technique-card" id="technique-card-{{ technique.id }}">
             <h3 class="technique-title">
                 {{ technique.order_in_belt }}. {{ technique.name }}
             </h3>
             <p class="technique-description">{{ technique.description|linebreaks }}</p>
-            
+            <!-- Tag display -->
+            <div class="mt-2 flex flex-wrap gap-2 items-center">
+                <span id="technique-tags-{{ technique.id }}">
+                {% for tag_assignment in technique.tag_assignments.all %}
+                    {% if tag_assignment.user == request.user or tag_assignment.user is None %}
+                        <span class="px-2 py-1 rounded text-xs font-semibold" style="background: {% if tag_assignment.tag.is_global %}var(--belt-accent-color){% else %}#374151{% endif %}; color: #fff;">
+                            {{ tag_assignment.tag.name }}
+                            {% if not tag_assignment.tag.is_global %}<span class="text-gray-300">(me)</span>{% endif %}
+                        </span>
+                    {% endif %}
+                {% empty %}
+                    <span class="text-xs text-gray-500">No tags</span>
+                {% endfor %}
+                </span>
+                <button class="ml-2 px-2 py-1 rounded bg-gray-700 text-xs text-white font-semibold hover:bg-gray-600 transition edit-tags-btn" data-technique-id="{{ technique.id }}">Edit Tags</button>
+            </div>
+            <!-- Tag Edit Modal -->
+            <div class="fixed z-50 left-0 top-0 w-full h-full bg-black bg-opacity-40 hidden" id="tag-modal-{{ technique.id }}">
+                <div class="bg-gray-900 rounded-lg shadow-lg p-6 max-w-xs mx-auto mt-32 relative">
+                    <h4 class="text-lg font-bold mb-4" style="color: var(--belt-accent-color);">Edit Tags</h4>
+                    <form class="tag-assign-form" data-technique-id="{{ technique.id }}">
+                        <div class="mb-4 flex flex-col gap-2">
+                            {% for tag in global_tags %}
+                                <label class="inline-flex items-center gap-2">
+                                    <input type="checkbox" name="tag_ids" value="{{ tag.id }}" 
+                                        {% for ta in technique.tag_assignments.all %}
+                                            {% if ta.tag.id == tag.id and ta.user == request.user %}checked{% elif ta.tag.id == tag.id and ta.user is None %}checked{% endif %}
+                                        {% endfor %}>
+                                    <span class="px-2 py-1 rounded bg-gray-800 text-xs" style="color: var(--belt-accent-color);">{{ tag.name }}</span>
+                                </label>
+                            {% endfor %}
+                            {% for tag in user_tags %}
+                                <label class="inline-flex items-center gap-2">
+                                    <input type="checkbox" name="tag_ids" value="{{ tag.id }}" 
+                                        {% for ta in technique.tag_assignments.all %}
+                                            {% if ta.tag.id == tag.id and ta.user == request.user %}checked{% elif ta.tag.id == tag.id and ta.user is None %}checked{% endif %}
+                                        {% endfor %}>
+                                    <span class="px-2 py-1 rounded bg-gray-700 text-xs">{{ tag.name }}</span>
+                                </label>
+                            {% endfor %}
+                        </div>
+                        <div class="flex gap-2">
+                            <button type="submit" class="px-4 py-2 rounded bg-blue-600 text-white font-semibold hover:bg-blue-700 transition">Save</button>
+                            <button type="button" class="px-4 py-2 rounded bg-gray-600 text-white font-semibold hover:bg-gray-700 transition close-tag-modal">Cancel</button>
+                        </div>
+                    </form>
+                    <button class="absolute top-2 right-2 text-gray-400 hover:text-white close-tag-modal">&times;</button>
+                </div>
+            </div>
             {% if technique.video_enabled %}
             <!-- Video Player Section -->
             <div class="mt-4">
@@ -104,4 +200,60 @@
     {% endfor %}
 </div>
 
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Open modal
+    document.querySelectorAll('.edit-tags-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var techId = btn.getAttribute('data-technique-id');
+            document.getElementById('tag-modal-' + techId).classList.remove('hidden');
+        });
+    });
+    // Close modal
+    document.querySelectorAll('.close-tag-modal').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            btn.closest('.fixed').classList.add('hidden');
+        });
+    });
+    // AJAX submit
+    document.querySelectorAll('.tag-assign-form').forEach(function(form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            var techId = form.getAttribute('data-technique-id');
+            var modal = document.getElementById('tag-modal-' + techId);
+            var checkboxes = form.querySelectorAll('input[name="tag_ids"]:checked');
+            var tagIds = Array.from(checkboxes).map(cb => cb.value);
+            var csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            fetch("{% url 'belts:ajax_assign_tags' %}", {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrfToken,
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+                body: new URLSearchParams({
+                    'technique_id': techId,
+                    'tag_ids[]': tagIds
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Update tag display
+                var tagSpan = document.getElementById('technique-tags-' + techId);
+                if (data.tags.length === 0) {
+                    tagSpan.innerHTML = '<span class="text-xs text-gray-500">No tags</span>';
+                } else {
+                    tagSpan.innerHTML = data.tags.map(tag =>
+                        `<span class="px-2 py-1 rounded text-xs font-semibold" style="background: ${tag.is_global ? 'var(--belt-accent-color)' : '#374151'}; color: #fff;">${tag.name}${tag.is_global ? '' : '<span class=\'text-gray-300\'>(me)</span>'}</span>`
+                    ).join(' ');
+                }
+                modal.classList.add('hidden');
+            });
+        });
+    });
+});
+</script>
 {% endblock %}

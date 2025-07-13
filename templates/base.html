@@ -140,6 +140,15 @@
                                 </svg>
                             </button>
                         </form>
+                        <div class="text-xs mt-2 text-right" style="color: var(--accent-gold); font-weight: bold;">
+                            {% if user.is_superuser %}
+                                Admin
+                            {% elif user.user_type == 'admin' %}
+                                Teacher
+                            {% else %}
+                                Student
+                            {% endif %}
+                        </div>
                     {% else %}
                         <a href="{% url 'account_login' %}" class="text-sm transition-colors hover-text-gold" style="color: var(--text-main);">Login</a>
                     {% endif %}
@@ -168,5 +177,6 @@
             });
         }
     </script>
+    {% block extra_js %}{% endblock %}
 </body>
 </html>
