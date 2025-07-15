@@ -1,6 +1,6 @@
 # Dojo Training Manual PWA
 
-An interactive Progressive Web App (PWA) for martial arts dojos, digitizing the physical training manual. This app provides students with a modern, installable, and interactive experience for learning techniques, reviewing curriculum, and accessing official resources.
+An interactive Progressive Web App (PWA) for martial arts dojos, digitizing a martial arts school's physical training manual. This app provides students with a modern, installable, and interactive experience for learning techniques, reviewing curriculum, and accessing official resources.
 
 ![Sign In](https://media.licdn.com/dms/image/v2/D562DAQG3YbCTcWs0sQ/profile-treasury-image-shrink_800_800/B56ZfHF9YCGQAY-/0/1751391937854?e=1752872400&v=beta&t=o_TlJj9K2CyCvAL5WasAf63jxRoph6AtFeEQfnppG7Q)
 
