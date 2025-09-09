@@ -28,7 +28,7 @@ __pycache__/
 # Ignore the directory where `collectstatic` places all static files for
 # production. This is a build artifact, not source code.
 /staticfiles/
-
+/static_data/
 # Ignore user-uploaded media files in a local development context if you
 # were to configure a local media root. Your production media is on GCS.
 /media/
